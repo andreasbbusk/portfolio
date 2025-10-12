@@ -161,4 +161,44 @@
   html:not(.page-loading) .page-content {
     opacity: 1;
   }
+
+  /*
+   * Accessibility: Reduce motion for users who prefer less animation
+   * Respects prefers-reduced-motion system setting
+   * Animations become near-instant (0.01ms) to maintain functionality
+   * while removing distracting motion
+   */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  /*
+   * Smooth scroll behavior for anchor links
+   * Disabled when user prefers reduced motion
+   */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  /*
+   * Enhanced focus styles for keyboard navigation
+   * Ensures all interactive elements have visible focus indicators
+   */
+  :focus-visible {
+    outline: 2px solid hsl(var(--ring));
+    outline-offset: 2px;
+  }
 }

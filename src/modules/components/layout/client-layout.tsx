@@ -38,14 +38,14 @@ export function ClientLayout({ children }: ClientLayoutProps) {
   };
 
   return (
-    <>
+    <Providers>
       {showLoader && <PageLoader onComplete={handleLoadingComplete} />}
       <div className="page-content">
         <Header />
         <main>
-          <Providers>{children}</Providers>
+          {children}
         </main>
       </div>
-    </>
+    </Providers>
   );
 }

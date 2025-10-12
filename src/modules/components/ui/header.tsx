@@ -4,6 +4,7 @@ import { memo } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Logo } from "@/modules/components/svg";
+import { ThemeToggle } from "./theme-toggle";
 
 type NavItem = {
   href: string;
@@ -12,7 +13,7 @@ type NavItem = {
 
 const NAV_ITEMS: NavItem[] = [
   { href: "/", label: "Home" },
-  { href: "/projects", label: "work" },
+  { href: "/works", label: "works" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
 ];
@@ -21,7 +22,7 @@ function Header() {
   const pathname = usePathname();
 
   return (
-    <header className="absolute py-4 px-8">
+    <header className="absolute py-4 px-8 w-full">
       <nav aria-label="Main navigation">
         <ul className="flex gap-6 list-none items-center">
           <li className="text-foreground">
@@ -42,6 +43,9 @@ function Header() {
               </li>
             );
           })}
+          <li className="ml-auto">
+            <ThemeToggle />
+          </li>
         </ul>
       </nav>
     </header>
