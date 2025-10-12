@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { DM_Sans, DM_Mono } from "next/font/google";
-import Providers from "./providers";
-import Header from "@/modules/ui/header";
+import { ClientLayout } from "@/modules/components/layout/client-layout";
 
 import "./globals.css";
 
@@ -31,13 +30,28 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${dmSans.variable} ${dmMono.variable} antialiased`}
+      className={`${dmSans.variable} ${dmMono.variable} antialiased page-loading`}
     >
+      <head>
+        {/*
+          Blocking script to prevent FOUC (Flash of Unstyled Content)
+          Sets a CSS custom property based on sessionStorage.
+        */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                var hasSeenLoader = sessionStorage.getItem('portfolio-loader-seen');
+                if (hasSeenLoader) {
+                  document.documentElement.style.setProperty('--loader-seen', 'visible');
+                }
+              })();
+            `,
+          }}
+        />
+      </head>
       <body>
-        <Header />
-        <main>
-          <Providers>{children}</Providers>
-        </main>
+        <ClientLayout>{children}</ClientLayout>
       </body>
     </html>
   );
