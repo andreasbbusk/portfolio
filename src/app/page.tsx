@@ -5,7 +5,7 @@ export default function Page() {
     <section className="min-h-screen w-full flex flex-col gap-5 justify-center items-center">
       <h1 className="text-4xl uppercase">Landing page</h1>
       <h2 className="font-mono text-2xl uppercase">Portfolio</h2>
-      <Button variant="default" className="">
+      <Button variant="orange" className="">
         Tekst
       </Button>
     </section>

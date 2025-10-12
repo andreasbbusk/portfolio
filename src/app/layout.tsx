@@ -31,6 +31,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      suppressHydrationWarning={true}
       className={`${dmSans.variable} ${dmMono.variable} antialiased page-loading`}
     >
       <head>
