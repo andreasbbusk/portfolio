@@ -7,7 +7,4 @@
  */
 
 export { Logo } from "./Logo";
-
-// Future icons can be added here:
-// export { Icon1 } from './Icon1'
-// export { Icon2 } from './Icon2'
+export { BurgerIcon } from "./BurgerIcon";

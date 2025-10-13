@@ -17,7 +17,8 @@ export type InViewProps = {
   transition?: Transition;
   viewOptions?: UseInViewOptions;
   as?: React.ElementType;
-  once?: boolean
+  once?: boolean;
+  className?: string;
 };
 
 const defaultVariants = {
@@ -31,7 +32,8 @@ export function InView({
   transition,
   viewOptions,
   as = 'div',
-  once
+  once,
+  className
 }: InViewProps) {
   const ref = useRef(null);
   const isInView = useInView(ref, viewOptions);
@@ -48,9 +50,9 @@ export function InView({
         if (once) setIsViewed(true)
       }}
       animate={(isInView || isViewed) ? "visible" : "hidden"}
-
       variants={variants}
       transition={transition}
+      className={className}
     >
       {children}
     </MotionComponent>

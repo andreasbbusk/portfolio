@@ -43,7 +43,7 @@ function AnimatedText({ text, delay = 0, onComplete }: AnimatedTextProps) {
     // Set initial state
     gsap.set(chars, {
       autoAlpha: 0,
-      yPercent: 125
+      yPercent: 125,
     });
 
     // Animate characters in
@@ -58,14 +58,18 @@ function AnimatedText({ text, delay = 0, onComplete }: AnimatedTextProps) {
     });
 
     // Animate characters out after a delay
-    tl.to(chars, {
-      autoAlpha: 0,
-      yPercent: -125,
-      duration: 0.4,
-      stagger: 0.02,
-      ease: "power3.in",
-      onComplete,
-    }, "+=0.4");
+    tl.to(
+      chars,
+      {
+        autoAlpha: 0,
+        yPercent: -125,
+        duration: 0.4,
+        stagger: 0.02,
+        ease: "power3.in",
+        onComplete,
+      },
+      "+=0.4"
+    );
 
     return () => {
       tl.kill();
@@ -107,8 +111,20 @@ export function PageLoader({ onComplete }: PageLoaderProps) {
   const [showSecondText, setShowSecondText] = useState(false);
 
   useEffect(() => {
-    if (!wrapRef.current || !bgRef.current || !containerRef.current ||
-        !progressBarRef.current || !logoRef.current) return;
+    // Defensive check - if already seen, bail out early
+    if (sessionStorage.getItem('portfolio-loader-seen')) {
+      onComplete?.();
+      return;
+    }
+
+    if (
+      !wrapRef.current ||
+      !bgRef.current ||
+      !containerRef.current ||
+      !progressBarRef.current ||
+      !logoRef.current
+    )
+      return;
 
     const customEase = "power4.inOut";
 
@@ -116,20 +132,18 @@ export function PageLoader({ onComplete }: PageLoaderProps) {
     const loadTimeline = gsap.timeline({
       defaults: {
         ease: customEase,
-        duration: 3.5,
+        duration: 3.3,
       },
     });
 
     // Progress bar and logo animation
-    loadTimeline
-      .to(progressBarRef.current, { scaleX: 1 })
-      .to(
-        logoRef.current,
-        {
-          clipPath: "inset(0% 0% 0% 0%)",
-        },
-        "<" // Start at the same time as progress bar
-      );
+    loadTimeline.to(progressBarRef.current, { scaleX: 1 }).to(
+      logoRef.current,
+      {
+        clipPath: "inset(0% 0% 0% 0%)",
+      },
+      "<" // Start at the same time as progress bar
+    );
 
     // Show second text after 2 seconds
     const textTimeout = setTimeout(() => {
@@ -156,31 +170,45 @@ export function PageLoader({ onComplete }: PageLoaderProps) {
         },
         "<"
       )
-      .add("hideContent", "<");
-
-    // Background slide up
-    loadTimeline
+      .add("hideContent", "<")
+      .call(() => {
+        // Mark as seen EARLY - before animations complete
+        // This ensures flag is set even if user refreshes mid-animation
+        sessionStorage.setItem("portfolio-loader-seen", "true");
+        // Remove page-loading class to reveal content before slide up
+        onComplete?.();
+      }, undefined, "hideContent+=0.3")
       .to(
         bgRef.current,
         {
-          yPercent: -101,
-          duration: 1,
+          autoAlpha: 0,
+          duration: 0.3,
         },
-        "hideContent"
+        "hideContent+=0.3"
+      );
+
+    // Slide entire container up and out
+    loadTimeline
+      .to(
+        wrapRef.current,
+        {
+          yPercent: -100,
+          duration: 0.8,
+          ease: "power2.inOut",
+        },
+        "hideContent+=0.6"
       )
       .call(() => {
-        // Mark loader as seen in session storage
-        sessionStorage.setItem('portfolio-loader-seen', 'true');
+        // Animation complete, unmount component
         setIsVisible(false);
-        // Call onComplete callback to notify parent
-        onComplete?.();
       });
 
     return () => {
       loadTimeline.kill();
       clearTimeout(textTimeout);
     };
-  }, [onComplete]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // Empty deps - only run once on mount
 
   // Don't render if animation is complete
   if (!isVisible) return null;
@@ -191,10 +219,7 @@ export function PageLoader({ onComplete }: PageLoaderProps) {
       className="fixed inset-0 z-[100] text-foreground w-full h-screen"
     >
       {/* Background */}
-      <div
-        ref={bgRef}
-        className="absolute inset-0 w-full h-full bg-background"
-      >
+      <div ref={bgRef} className="absolute inset-0 w-full h-full bg-background">
         {/* Progress Bar */}
         <div
           ref={progressBarRef}
@@ -231,13 +256,9 @@ export function PageLoader({ onComplete }: PageLoaderProps) {
         </div>
 
         {/* Text Container */}
-        <div className="absolute bottom-14 flex flex-col justify-center items-center">
-          {showFirstText && (
-            <AnimatedText text="Hold tight" delay={0} />
-          )}
-          {showSecondText && (
-            <AnimatedText text="Hi there!" delay={0} />
-          )}
+        <div className="absolute bottom-32 flex flex-col justify-center items-center">
+          {showFirstText && <AnimatedText text="Hey there!"/>}
+          {showSecondText && <AnimatedText text="Hold tight!" />}
         </div>
       </div>
     </div>
