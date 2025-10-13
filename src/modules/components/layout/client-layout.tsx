@@ -3,6 +3,7 @@
 import { ReactNode, useEffect, useState } from "react";
 import Header from "@/modules/components/ui/header";
 import { PageLoader } from "@/modules/components/ui/page-loader";
+import { SmoothScroll } from "@/modules/components/layout/smooth-scroll";
 import Providers from "@/app/providers";
 
 interface ClientLayoutProps {
@@ -39,6 +40,7 @@ export function ClientLayout({ children }: ClientLayoutProps) {
 
   return (
     <Providers>
+      <SmoothScroll disabled={showLoader} />
       {showLoader && <PageLoader onComplete={handleLoadingComplete} />}
       <div className="page-content">
         <Header />

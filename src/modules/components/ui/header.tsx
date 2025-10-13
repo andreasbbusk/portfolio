@@ -3,7 +3,7 @@
 import { memo } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Logo } from "@/modules/components/svg";
+import { BurgerIcon, Logo } from "@/modules/components/svg";
 import { ThemeToggle } from "./theme-toggle";
 
 type NavItem = {
