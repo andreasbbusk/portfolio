@@ -33,6 +33,7 @@
   --color-secondary: var(--secondary);
   --color-primary-foreground: var(--primary-foreground);
   --color-primary: var(--primary);
+  --color-orange: var(--orange);
   --color-popover-foreground: var(--popover-foreground);
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
@@ -47,6 +48,7 @@
   --radius: 0.625rem;
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
+  --orange: oklch(0.6792 0.2128 36.53);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
@@ -146,5 +148,43 @@
   html.page-loading .page-content {
     /* Hide content unless loader was already seen (defaults to hidden) */
     visibility: var(--loader-seen, hidden);
+    opacity: 0;
+  }
+
+  /* Smooth fade-in transition when page-loading class is removed */
+  .page-content {
+    transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 1;
+  }
+
+  /* Override transition for instant show when loader was already seen */
+  html:not(.page-loading) .page-content {
+    opacity: 1;
+  }
+
+  /*
+   * Accessibility: Reduce motion for users who prefer less animation
+   * Respects prefers-reduced-motion system setting
+   * Animations become near-instant (0.01ms) to maintain functionality
+   * while removing distracting motion
+   */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  /*
+   * Enhanced focus styles for keyboard navigation
+   * Ensures all interactive elements have visible focus indicators
+   */
+  :focus-visible {
+    outline: 2px solid hsl(var(--ring));
+    outline-offset: 2px;
   }
 }
