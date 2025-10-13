@@ -3,6 +3,7 @@
 import { ReactNode, useEffect, useState } from "react";
 import Header from "@/modules/components/ui/header";
 import { PageLoader } from "@/modules/components/ui/page-loader";
+import { BackToTop } from "@/modules/components/ui/back-to-top";
 import { SmoothScroll } from "@/modules/components/layout/smooth-scroll";
 import Providers from "@/app/providers";
 
@@ -47,6 +48,7 @@ export function ClientLayout({ children }: ClientLayoutProps) {
         <main>
           {children}
         </main>
+        <BackToTop />
       </div>
     </Providers>
   );

@@ -7,6 +7,13 @@ interface LenisScrollProps {
   disabled?: boolean;
 }
 
+// Extend Window interface for Lenis
+declare global {
+  interface Window {
+    lenis?: Lenis;
+  }
+}
+
 export function SmoothScroll({ disabled = false }: LenisScrollProps) {
   const lenisRef = useRef<Lenis | null>(null);
   const rafRef = useRef<number | null>(null);
@@ -22,15 +29,18 @@ export function SmoothScroll({ disabled = false }: LenisScrollProps) {
 
     // Initialize Lenis with slow, buttery configuration
     lenisRef.current = new Lenis({
-      duration: 1.5,
+      duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: "vertical",
       gestureOrientation: "vertical",
       smoothWheel: true,
-      wheelMultiplier: 0.85,
+      wheelMultiplier: 0.90,
       touchMultiplier: 2,
       infinite: false,
     });
+
+    // Expose Lenis instance globally for programmatic scrolling
+    window.lenis = lenisRef.current;
 
     // Start the requestAnimationFrame loop
     function raf(time: number) {
@@ -47,6 +57,7 @@ export function SmoothScroll({ disabled = false }: LenisScrollProps) {
       }
       lenisRef.current?.destroy();
       lenisRef.current = null;
+      window.lenis = undefined;
     };
   }, [disabled]);
 

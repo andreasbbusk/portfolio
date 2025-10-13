@@ -3,7 +3,7 @@
 import { memo } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { BurgerIcon, Logo } from "@/modules/components/svg";
+import { Logo } from "@/modules/components/svg";
 import { ThemeToggle } from "./theme-toggle";
 
 type NavItem = {
@@ -12,8 +12,7 @@ type NavItem = {
 };
 
 const NAV_ITEMS: NavItem[] = [
-  { href: "/", label: "Home" },
-  { href: "/works", label: "works" },
+  { href: "/works", label: "Works" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
 ];
