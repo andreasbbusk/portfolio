@@ -1,11 +1,5 @@
 import type { NextConfig } from "next";
-import path from "path";
 
-const nextConfig: NextConfig = {
-  outputFileTracingRoot: path.join(process.cwd(), ".."),
-  experimental: {
-    externalDir: true,
-  },
-};
+const nextConfig: NextConfig = {};
 
 export default nextConfig;
