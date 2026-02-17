@@ -1,8 +1,8 @@
 "use client";
 
 import { useCallback, useEffect, useRef } from "react";
-import { useViewportContent } from "@amikkelsen/viewport-guides-react";
 import {
+  getBottomNavZones,
   getBottomNavZone,
   subscribeBottomNavZones,
 } from "@/features/navigation/utils/bottom-nav-zone-registry";
@@ -13,6 +13,35 @@ import {
 import { hasSameBottomNavMode } from "@/features/navigation/utils/bottom-nav-mode-utils";
 
 const NO_ACTIVE_ZONE_GRACE_MS = 180;
+const TRACKER_LINE_RATIO = 0.65;
+
+function getActiveZoneIdAtLine(lineY: number): string | null {
+  const zones = getBottomNavZones();
+  let activeZoneId: string | null = null;
+  let activeDistance = Number.POSITIVE_INFINITY;
+
+  for (const zone of zones) {
+    const element = zone.element;
+
+    if (!element || !element.isConnected) {
+      continue;
+    }
+
+    const bounds = element.getBoundingClientRect();
+    const containsLine = bounds.top <= lineY && bounds.bottom >= lineY;
+    if (!containsLine) {
+      continue;
+    }
+
+    const distanceFromLine = Math.abs(bounds.top - lineY);
+    if (distanceFromLine < activeDistance) {
+      activeDistance = distanceFromLine;
+      activeZoneId = zone.id;
+    }
+  }
+
+  return activeZoneId;
+}
 
 export function BottomNavViewportController() {
   const activeZoneIdRef = useRef<string | null>(null);
@@ -98,70 +127,43 @@ export function BottomNavViewportController() {
     [clearNoZoneTimeout]
   );
 
-  const subscribeTracker = useCallback((notify: () => void) => {
+  const syncActiveZone = useCallback(() => {
+    const lineY = window.innerHeight * TRACKER_LINE_RATIO;
+    const activeZoneId = getActiveZoneIdAtLine(lineY);
+
+    activeZoneIdRef.current = activeZoneId;
+    applyZoneState(activeZoneId);
+  }, [applyZoneState]);
+
+  useEffect(() => {
     let rafId: number | null = null;
-    const queueNotify = () => {
+
+    const queueSync = () => {
       if (rafId !== null) {
         return;
       }
 
       rafId = window.requestAnimationFrame(() => {
         rafId = null;
-        notify();
+        syncActiveZone();
       });
     };
 
-    window.addEventListener("scroll", queueNotify, { passive: true });
-    window.addEventListener("resize", queueNotify, { passive: true });
-    const unsubscribeZones = subscribeBottomNavZones(queueNotify);
+    window.addEventListener("scroll", queueSync, { passive: true });
+    window.addEventListener("resize", queueSync, { passive: true });
+    const unsubscribeZones = subscribeBottomNavZones(queueSync);
+
+    queueSync();
 
     return () => {
       if (rafId !== null) {
         window.cancelAnimationFrame(rafId);
       }
-
-      window.removeEventListener("scroll", queueNotify);
-      window.removeEventListener("resize", queueNotify);
+      window.removeEventListener("scroll", queueSync);
+      window.removeEventListener("resize", queueSync);
       unsubscribeZones();
     };
-  }, []);
-
-  const { controller, activeZoneId } = useViewportContent({
-    guides: {
-      enabled: false,
-      storageKey: null,
-      queryParam: null,
-      toggleKey: null,
-    },
-    tracker: {
-      zoneSelector: "[data-bottom-nav-zone]",
-      zoneIdAttribute: "data-bottom-nav-zone",
-      lineRatio: 0.65,
-      fallbackToNearest: false,
-      subscribe: subscribeTracker,
-    },
-  });
-
-  useEffect(() => {
-    if (!controller) {
-      return;
-    }
-
-    controller.start();
-    controller.syncZones();
-    controller.refresh();
-  }, [controller]);
-
-  useEffect(() => {
-    activeZoneIdRef.current = activeZoneId;
-    applyZoneState(activeZoneId);
-  }, [activeZoneId, applyZoneState]);
-
-  useEffect(() => {
-    return subscribeBottomNavZones(() => {
-      applyZoneState(activeZoneIdRef.current);
-    });
-  }, [applyZoneState]);
+  }, [syncActiveZone]);
 
   useEffect(() => {
     return () => {
