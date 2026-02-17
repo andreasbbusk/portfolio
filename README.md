@@ -1,10 +1,10 @@
 ## Portfolio
 
-A simple personal portfolio built with Next.js 15, React 19, and Tailwind CSS v4.
+A simple personal portfolio built with Next.js 16, React 19, and Tailwind CSS v4.
 
 ### Tech Stack
 
-- Next.js 15 (App Router)
+- Next.js 16 (App Router)
 - React 19
 - TypeScript
 - Tailwind CSS v4
@@ -33,17 +33,34 @@ A simple personal portfolio built with Next.js 15, React 19, and Tailwind CSS v4
 
 ### Project Structure
 
-```
+```txt
 src/
-  app/                # Next.js App Router
+  app/
     layout.tsx
-    page.tsx
+    providers.tsx
     globals.css
-    [routes]/
-  modules/
-    ui/               # Reusable UI components
-    projects/
-    about/
+    favicon.ico
+    (site)/
+      page.tsx
+      about/page.tsx
+      works/page.tsx
+      contact/page.tsx
+      _components/
+  features/
+    navigation/
+      ui/
+      hooks/
+      state/
+      config/
+      utils/
+    loader/
+      ui/
+      utils/
+  shared/
+    ui/
+    icons/
+    config/
+    utils/
 ```
 
 ### Notes
