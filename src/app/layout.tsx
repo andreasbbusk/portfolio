@@ -1,7 +1,19 @@
 import type { Metadata } from "next";
 import { DM_Sans, DM_Mono } from "next/font/google";
-import { ClientLayout } from "@/modules/components/layout/client-layout";
+import AppProviders from "@/app/providers";
+import SiteHeader from "@/features/navigation/ui/site-header";
+import { BackToTop } from "@/shared/ui/back-to-top";
+import { BottomNav } from "@/features/navigation/ui/bottom-nav";
+import {
+  BottomNavViewportController,
+} from "@/features/navigation/ui/bottom-nav-viewport-controller";
+import { LayoutEffects } from "@/features/loader/ui/layout-effects";
+import {
+  LOADER_COOKIE,
+  shouldShowLoader,
+} from "@/features/loader/utils/page-loader-storage";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { cookies } from "next/headers";
 
 import "./globals.css";
 
@@ -23,40 +35,35 @@ export const metadata: Metadata = {
   description: "Portfolio description",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const cookieStore = await cookies();
+  const initialShowLoader = shouldShowLoader(
+    cookieStore.get(LOADER_COOKIE)?.value,
+  );
+
   return (
     <html
       lang="en"
-      suppressHydrationWarning={true}
-      className={`${dmSans.variable} ${dmMono.variable} antialiased page-loading`}
+      className={`${dmSans.variable} ${dmMono.variable} antialiased${
+        initialShowLoader ? " page-loading" : ""
+      }`}
     >
-      <head>
-        {/*
-          Blocking script to prevent FOUC (Flash of Unstyled Content)
-          Sets a CSS custom property based on sessionStorage.
-        */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function() {
-                var hasSeenLoader = sessionStorage.getItem('portfolio-loader-seen');
-                if (hasSeenLoader) {
-                  document.documentElement.style.setProperty('--loader-seen', 'visible');
-                }
-              })();
-            `,
-          }}
-        />
-      </head>
       <body>
-        <ClientLayout>
-          {children}
+        <AppProviders>
+          <LayoutEffects initialShowLoader={initialShowLoader} />
+          <BottomNavViewportController />
+          <div className="page-content">
+            <SiteHeader />
+            <main>{children}</main>
+            <BackToTop />
+            <BottomNav />
+          </div>
           <SpeedInsights />
-        </ClientLayout>
+        </AppProviders>
       </body>
     </html>
   );

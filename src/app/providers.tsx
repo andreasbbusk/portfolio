@@ -1,9 +1,13 @@
-import { ThemeProvider } from 'next-themes';
+import { ThemeProvider } from "next-themes";
 
-export default function Providers({ children }: { children: React.ReactNode }) {
+interface AppProvidersProps {
+  children: React.ReactNode;
+}
+
+export default function AppProviders({ children }: AppProvidersProps) {
   return (
-      <ThemeProvider attribute="class" defaultTheme='light'>
-        {children}
-      </ThemeProvider>
+    <ThemeProvider attribute="class" defaultTheme="light">
+      {children}
+    </ThemeProvider>
   );
 }

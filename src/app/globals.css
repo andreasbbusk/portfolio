@@ -134,9 +134,7 @@
 
   /*
    * Prevent flash of unstyled content (FOUC) while loader is active
-   * Uses CSS custom property set by blocking script for clean control
-   * --loader-seen: visible = user has seen loader before, show content immediately
-   * --loader-seen: undefined = first visit, keep hidden until loader shows
+   * page-loading class is only rendered on the server when loader should show
    *
    * Note: We hide .page-content (header + main), not the entire body,
    * so the PageLoader remains visible
@@ -146,8 +144,7 @@
   }
 
   html.page-loading .page-content {
-    /* Hide content unless loader was already seen (defaults to hidden) */
-    visibility: var(--loader-seen, hidden);
+    visibility: hidden;
     opacity: 0;
   }
 
@@ -186,5 +183,35 @@
   :focus-visible {
     outline: 2px solid hsl(var(--ring));
     outline-offset: 2px;
+  }
+
+  /*
+   * Native scrollbar styling for the document scroller.
+   * Keeps window scrolling behavior, but matches the ScrollArea look.
+   */
+  html {
+    scrollbar-gutter: stable;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border) transparent;
+  }
+
+  html::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  html::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  html::-webkit-scrollbar-thumb {
+    background-color: var(--border);
+    border: 1px solid transparent;
+    border-radius: 9999px;
+    background-clip: padding-box;
+  }
+
+  html::-webkit-scrollbar-thumb:hover {
+    background-color: color-mix(in oklab, var(--border) 85%, var(--foreground));
   }
 }
