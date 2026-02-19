@@ -1,4 +1,14 @@
+import type { Metadata } from "next";
 import { Button } from "@/shared/ui/button";
+
+export const metadata: Metadata = {
+  title: "Contact",
+  description:
+    "Get in touch with Andreas Busk Mikkelsen for frontend engineering and product-focused web development opportunities.",
+  alternates: {
+    canonical: "/contact",
+  },
+};
 
 export default function ContactPage() {
   return (
