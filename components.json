@@ -12,11 +12,12 @@
   },
   "iconLibrary": "lucide",
   "aliases": {
-    "components": "@/modules/components",
-    "utils": "@/modules/lib/utils",
-    "ui": "@/modules/components/ui",
-    "lib": "@/modules/lib",
-    "hooks": "@/modules/hooks"
+    "components": "@/components",
+    "utils": "@/utils/cn",
+    "ui": "@/components/ui"
   },
-  "registries": {}
+  "registries": {
+    "@aceternity": "https://ui.aceternity.com/registry/{name}.json",
+    "@magicui": "https://magicui.design/r/{name}.json"
+  }
 }
