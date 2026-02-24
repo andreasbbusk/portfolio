@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
-import { getSiteUrlString } from "@/shared/config/site-url";
+import { getSiteUrlString } from "@/config/site-url";
 
-const ROUTES = ["/", "/about", "/works", "/contact"] as const;
+const ROUTES = ["/", "/works"] as const;
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const siteUrl = getSiteUrlString();

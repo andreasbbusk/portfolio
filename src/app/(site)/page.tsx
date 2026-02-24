@@ -1,22 +1,30 @@
-import { Button } from "@/shared/ui/button";
-import { HomeFeaturedWork } from "@/app/(site)/_components/home-featured-work-section";
+import type { Metadata } from "next";
+import { AboutSection } from "@/features/about";
+import { ContactFooterSection } from "@/features/contact";
+import { HeroSection } from "@/features/hero";
+import { SelectedWorksSection } from "@/features/works-preview";
+import { SkillsSection } from "@/features/skills";
+
+export const metadata: Metadata = {
+  title: "Portfolio",
+  description:
+    "Frontend projects, architecture decisions, and interaction design built with modern React and Next.js.",
+  alternates: {
+    canonical: "/",
+  },
+};
 
 export default function HomePage() {
   return (
-    <>
-      <section className="min-h-screen w-full flex flex-col gap-5 justify-center items-center">
-        <h1 className="text-4xl uppercase">Landing page</h1>
-        <h2 className="font-mono text-2xl uppercase">Portfolio</h2>
-        <Button variant="orange" className="">
-          Tekst
-        </Button>
-      </section>
-
-      <div className="h-[35vh]" />
-
-      <HomeFeaturedWork />
-
-      <div className="h-[45vh]" />
-    </>
+    <div
+      id="top"
+      className="pt-[84px] text-[#09090a] [font-family:var(--font-dm-sans)]"
+    >
+      <HeroSection />
+      <SelectedWorksSection />
+      <AboutSection />
+      <SkillsSection />
+      <ContactFooterSection />
+    </div>
   );
 }
