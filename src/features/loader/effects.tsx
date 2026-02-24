@@ -2,19 +2,19 @@
 
 import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
-import { SmoothScroll } from "@/features/loader/ui/smooth-scroll";
+import { SmoothScroll } from "@/features/loader/scroll";
 
 const PageLoader = dynamic(
   () =>
-    import("@/features/loader/ui/page-loader").then(
-      (module) => module.PageLoader
+    import("@/features/loader/loader").then(
+      (module) => module.PageLoader,
     ),
   {
     ssr: false,
     loading: () => (
-      <div className="fixed inset-0 z-[100] bg-background" aria-hidden="true" />
+      <div className="fixed inset-0 z-100 bg-background" aria-hidden="true" />
     ),
-  }
+  },
 );
 
 interface LayoutEffectsProps {

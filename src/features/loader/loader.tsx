@@ -2,8 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
-import { Logo } from "@/shared/icons/logo";
-import { markLoaderSeen } from "@/features/loader/utils/page-loader-storage";
+import { Logo } from "@/components/icons/logo";
+import { markLoaderSeen } from "@/features/loader/storage";
 
 interface PageLoaderProps {
   onComplete?: () => void;
@@ -55,7 +55,7 @@ export function PageLoader({ onComplete }: PageLoaderProps) {
     };
 
     const prefersReducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
+      "(prefers-reduced-motion: reduce)",
     ).matches;
 
     if (prefersReducedMotion) {
@@ -80,7 +80,7 @@ export function PageLoader({ onComplete }: PageLoaderProps) {
           clipPath: "inset(0% 0% 0% 0%)",
           duration: 3.3,
         },
-        "<"
+        "<",
       )
       .to(
         container,
@@ -88,7 +88,7 @@ export function PageLoader({ onComplete }: PageLoaderProps) {
           autoAlpha: 0,
           duration: 0.5,
         },
-        "+=0.6"
+        "+=0.6",
       )
       .to(
         progressBar,
@@ -97,19 +97,23 @@ export function PageLoader({ onComplete }: PageLoaderProps) {
           transformOrigin: "right center",
           duration: 0.5,
         },
-        "<"
+        "<",
       )
       .add("hideContent", "<")
-      .call(() => {
-        complete();
-      }, undefined, "hideContent+=0.3")
+      .call(
+        () => {
+          complete();
+        },
+        undefined,
+        "hideContent+=0.3",
+      )
       .to(
         bg,
         {
           autoAlpha: 0,
           duration: 0.3,
         },
-        "hideContent+=0.3"
+        "hideContent+=0.3",
       )
       .to(
         wrap,
@@ -118,7 +122,7 @@ export function PageLoader({ onComplete }: PageLoaderProps) {
           duration: 0.8,
           ease: "power2.inOut",
         },
-        "hideContent+=0.6"
+        "hideContent+=0.6",
       )
       .call(() => {
         setIsVisible(false);
@@ -145,7 +149,7 @@ export function PageLoader({ onComplete }: PageLoaderProps) {
   return (
     <div
       ref={wrapRef}
-      className="fixed inset-0 z-[100] h-screen w-full text-foreground"
+      className="fixed inset-0 z-100 h-screen w-full text-foreground"
     >
       <div ref={bgRef} className="absolute inset-0 h-full w-full bg-background">
         <div
@@ -160,7 +164,7 @@ export function PageLoader({ onComplete }: PageLoaderProps) {
 
       <div
         ref={containerRef}
-        className="relative z-[2] flex h-full w-full flex-col items-center justify-center"
+        className="relative z-2 flex h-full w-full flex-col items-center justify-center"
       >
         <div className="relative flex h-12 w-48 items-center justify-center">
           <div className="absolute w-full">
@@ -177,7 +181,6 @@ export function PageLoader({ onComplete }: PageLoaderProps) {
             <Logo className="w-full" />
           </div>
         </div>
-
       </div>
     </div>
   );

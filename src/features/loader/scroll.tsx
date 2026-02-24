@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import Lenis from "lenis";
+import { useScrollController } from "@/features/loader/scroll-controller";
 
 interface SmoothScrollProps {
   disabled?: boolean;
@@ -17,6 +18,7 @@ declare global {
 export function SmoothScroll({ disabled = false }: SmoothScrollProps) {
   const lenisRef = useRef<Lenis | null>(null);
   const animationFrameRef = useRef<number | null>(null);
+  const scrollController = useScrollController();
 
   useEffect(() => {
     // Check if user prefers reduced motion
@@ -41,8 +43,7 @@ export function SmoothScroll({ disabled = false }: SmoothScrollProps) {
       infinite: false,
     });
 
-    // Expose Lenis instance globally for programmatic scrolling
-    window.lenis = lenisRef.current;
+    scrollController.setLenisInstance(lenisRef.current);
 
     // Start the requestAnimationFrame loop
     function handleAnimationFrame(time: number) {
@@ -59,9 +60,9 @@ export function SmoothScroll({ disabled = false }: SmoothScrollProps) {
       }
       lenisRef.current?.destroy();
       lenisRef.current = null;
-      window.lenis = undefined;
+      scrollController.setLenisInstance(null);
     };
-  }, [disabled]);
+  }, [disabled, scrollController]);
 
   return null;
 }
