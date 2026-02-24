@@ -1,69 +1,56 @@
-## Portfolio
+# Portfolio
 
-A simple personal portfolio built with Next.js 16, React 19, and Tailwind CSS v4.
+Personal portfolio site built with Next.js 16, React 19, and Tailwind CSS v4.
 
-### Tech Stack
+## Tech
 
 - Next.js 16 (App Router)
 - React 19
 - TypeScript
 - Tailwind CSS v4
+- Motion
 
-### Getting Started
+## Getting Started
 
-1. Install dependencies:
-   ```bash
-   npm install
-   ```
-2. Run the development server:
-   ```bash
-   npm run dev
-   ```
-3. Build for production:
-   ```bash
-   npm run build && npm start
-   ```
+```bash
+bun install
+bun run dev
+```
 
-### Scripts
+Build and run:
 
-- `npm run dev`: Start dev server (Turbopack)
-- `npm run build`: Build the app (Turbopack)
-- `npm start`: Start production server
-- `npm run lint`: Run ESLint
+```bash
+bun run build
+bun run start
+```
 
-### Project Structure
+## Scripts
+
+- `bun run dev`
+- `bun run build`
+- `bun run start`
+- `bun run lint`
+
+## Structure
 
 ```txt
 src/
-  app/
-    layout.tsx
-    providers.tsx
-    globals.css
-    favicon.ico
-    (site)/
-      page.tsx
-      about/page.tsx
-      works/page.tsx
-      contact/page.tsx
-      _components/
+  app/                # Next.js routes
   features/
-    navigation/
-      ui/
-      hooks/
-      state/
-      config/
-      utils/
-    loader/
-      ui/
-      utils/
-  shared/
-    ui/
-    icons/
-    config/
-    utils/
+    home/             # Homepage sections (hero/about/skills/contact/works preview)
+    works/            # /works route (future case-study route support lives here)
+    navigation/       # Header + header-specific components
+    loader/           # Loader, transition, smooth scroll, storage
+  ui/                 # Global reusable primitives/components
+  icons/              # Global icons
+  utils/              # Small helpers
+  config/             # App config
 ```
 
-### Notes
+## Notes
 
-- Tailwind v4 is configured via PostCSS (`@tailwindcss/postcss`).
+- `ui/` is for global reusable primitives/components.
+- `features/*/components/` is for feature-specific pieces only.
+- `/about` and `/contact` are intentionally homepage sections, not routes.
+- Experimental/archive code is kept outside this repo in `/Users/andreasmikkelsen/Documents/GitHub/tmp/portfolio-archive/`.
 - Absolute imports use the `@/` alias mapped to `src/`.
