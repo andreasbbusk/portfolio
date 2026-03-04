@@ -10,6 +10,7 @@ type InlineCopyLinkContextValue = {
   copied: boolean;
   copyLabel: string;
   copiedLabel: string;
+  interactionActive: boolean;
   value: string;
   onCopy: () => Promise<boolean>;
 };
@@ -131,6 +132,7 @@ function InlineCopyLink({
   ...props
 }: InlineCopyLinkProps) {
   const [copied, setCopied] = React.useState(false);
+  const [interactionActive, setInteractionActive] = React.useState(false);
   const timeoutRef = React.useRef<number | null>(null);
 
   const onCopy = React.useCallback(async () => {
@@ -167,7 +169,14 @@ function InlineCopyLink({
 
   return (
     <InlineCopyLinkContext.Provider
-      value={{ copied, copyLabel, copiedLabel, value, onCopy }}
+      value={{
+        copied,
+        copyLabel,
+        copiedLabel,
+        interactionActive,
+        value,
+        onCopy,
+      }}
     >
       <div
         data-slot="inline-copy-link"
@@ -175,6 +184,16 @@ function InlineCopyLink({
           "group/inline-copy inline-flex max-w-full items-center text-black/72",
           className,
         )}
+        onMouseEnter={() => setInteractionActive(true)}
+        onMouseLeave={() => setInteractionActive(false)}
+        onFocus={() => setInteractionActive(true)}
+        onBlur={(event) => {
+          if (event.currentTarget.contains(event.relatedTarget)) {
+            return;
+          }
+
+          setInteractionActive(false);
+        }}
         {...props}
       >
         {children}
@@ -234,15 +253,15 @@ function InlineCopyLinkButton({
   copyAriaLabel = "Copy value",
   ...props
 }: InlineCopyLinkButtonProps) {
-  const { copied, copyLabel, copiedLabel, onCopy } = useInlineCopyLinkContext(
-    "InlineCopyLinkButton",
-  );
+  const { copied, copyLabel, copiedLabel, interactionActive, onCopy } =
+    useInlineCopyLinkContext("InlineCopyLinkButton");
   const Comp = asChild ? SlotPrimitive.Slot : "button";
 
   return (
     <Comp
       data-slot="inline-copy-link-button"
       aria-label={copyAriaLabel}
+      aria-hidden={!interactionActive}
       className={cn(
         "peer/inline-copy-button order-1 inline-flex h-5 max-w-0 shrink-0 items-center justify-start gap-0.5 overflow-hidden whitespace-nowrap text-[12px] leading-none font-medium text-black/55 opacity-0 pointer-events-none after:inline-block after:w-0 after:shrink-0 after:content-[''] transition-[max-width,opacity,color] duration-320 ease-[cubic-bezier(0.2,0.9,0.28,1)] after:transition-[width] after:duration-320 after:ease-[cubic-bezier(0.2,0.9,0.28,1)] hover:text-black focus-visible:max-w-[88px] focus-visible:opacity-100 focus-visible:pointer-events-auto focus-visible:text-black focus-visible:outline-none focus-visible:after:w-1 group-hover/inline-copy:max-w-[88px] group-hover/inline-copy:opacity-100 group-hover/inline-copy:pointer-events-auto group-hover/inline-copy:after:w-1 motion-reduce:transition-none motion-reduce:after:transition-none",
         className,
@@ -263,6 +282,7 @@ function InlineCopyLinkButton({
           }
         })();
       }}
+      tabIndex={interactionActive ? 0 : -1}
       type={type ?? "button"}
       {...props}
     >

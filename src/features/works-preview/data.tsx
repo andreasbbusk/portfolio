@@ -1,12 +1,12 @@
 import type { ProjectMetaProps } from "@/features/works-preview/types";
-import type { PlaceholderVariant } from "@/features/works-preview/types";
 
 export type WorksPreviewFeature = {
   mediaClassName?: string;
   meta: ProjectMetaProps;
   metaClassName?: string;
+  previewImageAlt: string;
+  previewImageSrc: string;
   url: string;
-  variant: PlaceholderVariant;
 };
 
 export type WorksPreviewPortfolioFeature = {
@@ -16,12 +16,13 @@ export type WorksPreviewPortfolioFeature = {
   stack: string;
   title: string;
   url: string;
-  variant: PlaceholderVariant;
 };
 
 export const VERTO_WORK: WorksPreviewFeature = {
-  url: "verto.app",
-  variant: "verto",
+  url: "verto-zeta.vercel.app",
+  previewImageSrc: "/images/works/verto-1.webp",
+  previewImageAlt:
+    "Verto study session preview with flashcard interface and keyboard-first controls",
   meta: {
     title: "Verto",
     description:
@@ -32,8 +33,10 @@ export const VERTO_WORK: WorksPreviewFeature = {
 };
 
 export const RANK_TRACKER_WORK: WorksPreviewFeature = {
-  url: "conversio-hub.com",
-  variant: "rank-tracker",
+  url: "rank-tracker-flax.vercel.app",
+  previewImageSrc: "/images/works/rank-tracker-1.webp",
+  previewImageAlt:
+    "Rank Tracker dashboard preview with performance scorecards and trend graph",
   mediaClassName: "lg:mt-16",
   metaClassName: "lg:mt-12",
   meta: {
@@ -60,7 +63,7 @@ export const RANK_TRACKER_WORK: WorksPreviewFeature = {
         </p>
       </>
     ),
-    stack: "Next.js · React · TypeScript · TanStack",
+    stack: "Next.js · TypeScript · MongoDB · TanStack Table · Recharts",
     secondaryLink: {
       href: "http://hub.conversio.dk",
       label: "hub.conversio.dk",
@@ -71,20 +74,24 @@ export const RANK_TRACKER_WORK: WorksPreviewFeature = {
 };
 
 export const GOLDILOX_WORK: WorksPreviewFeature = {
-  url: "goldilox-paradox.dev",
-  variant: "goldilox",
+  url: "",
+  previewImageSrc: "/images/works/goldilox-1.webp",
+  previewImageAlt:
+    "Goldilox Paradox Earth chapter preview with atmospheric glow and starfield",
   meta: {
     title: "Goldilox Paradox",
     description:
-      "A one-page WebGL scrollytelling experience about Earth, Venus, and Mars. Scroll-driven chapters, shader-driven visuals, no backend.",
-    stack: "Astro · Three.js · GLSL · GSAP",
+      "A single-page WebGL scrollytelling experience about planetary habitability. Ray-traced planets via custom GLSL shaders, scroll-driven chapters, no backend.",
+    stack: "Astro · Three.js · GLSL · SCSS",
     primaryLink: { href: "/works/goldilox-paradox", label: "Read Case Study" },
   },
 };
 
 export const VEJLE_WORK: WorksPreviewFeature = {
-  url: "vejlemodhudcancer.dk",
-  variant: "vejle",
+  url: "",
+  previewImageSrc: "/images/works/vmh-1.webp",
+  previewImageAlt:
+    "Vejle mod hudcancer homepage preview with hero, statistics, and event section",
   meta: {
     title: (
       <>
@@ -96,7 +103,7 @@ export const VEJLE_WORK: WorksPreviewFeature = {
     ),
     description:
       "Website for the Danish non-profit Vejle mod hudcancer with CMS-driven project and gallery content. Dynamic pages and a motion layer that stays readable.",
-    stack: "Next.js · Sanity · Tailwind · Motion",
+    stack: "Next.js · Sanity · Tailwind · Framer Motion",
     primaryLink: {
       href: "/works/vejle-mod-hudcancer",
       label: "Read Case Study",
@@ -106,10 +113,9 @@ export const VEJLE_WORK: WorksPreviewFeature = {
 
 export const PORTFOLIO_WORK: WorksPreviewPortfolioFeature = {
   url: "portfolio.andreas.dev",
-  variant: "portfolio",
   title: "Portfolio",
   body: "My personal portfolio-in-progress, focused on interaction systems: nav behavior, loader flow, and smooth-scroll foundations.",
-  stack: "Next.js · TypeScript · Motion · Tailwind",
-  href: "https://github.com/andreasmikkelsen/portfolio",
+  stack: "Next.js · TypeScript · Motion · GSAP · Tailwind",
+  href: "https://github.com/andreasbbusk",
   label: "View Source",
 };

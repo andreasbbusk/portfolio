@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
 import { DM_Sans, DM_Mono } from "next/font/google";
+import { cookies } from "next/headers";
 import SiteHeader from "@/features/navigation/header";
-import { BackToTop } from "@/components/ui/back-to-top";
+// import { BackToTop } from "@/components/ui/back-to-top";
 import { LayoutEffects } from "@/features/loader/effects";
 import { ScrollControllerProvider } from "@/features/loader/scroll-controller";
 import { PageTransition } from "@/features/loader/transition";
 import { LOADER_COOKIE, shouldShowLoader } from "@/features/loader/storage";
 import { getSiteUrl } from "@/config/site-url";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { cookies } from "next/headers";
 
 import "./globals.css";
 
@@ -69,10 +69,8 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // Intentional dynamic rendering: this request cookie controls loader behavior
-  // to prevent FOUC and keep first-visit transitions deterministic.
   const cookieStore = await cookies();
-  const initialShowLoader = shouldShowLoader(
+  const shouldShowInitialLoader = shouldShowLoader(
     cookieStore.get(LOADER_COOKIE)?.value,
   );
 
@@ -80,17 +78,20 @@ export default async function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${dmSans.variable} ${dmMono.variable} antialiased${initialShowLoader ? " page-loading" : ""}`}
+      className={`${dmSans.variable} ${dmMono.variable} antialiased ${shouldShowInitialLoader ? "page-loading" : ""}`}
     >
       <body>
         <ScrollControllerProvider>
-          <LayoutEffects initialShowLoader={initialShowLoader} />
+          <LayoutEffects initialShowLoader={shouldShowInitialLoader} />
           <div className="page-content">
+            <a href="#main-content" className="skip-link">
+              Skip to main content
+            </a>
             <SiteHeader />
-            <main>
+            <main id="main-content" tabIndex={-1}>
               <PageTransition>{children}</PageTransition>
             </main>
-            <BackToTop />
+            {/* <BackToTop /> */}
           </div>
         </ScrollControllerProvider>
         <SpeedInsights />

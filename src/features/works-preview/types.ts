@@ -1,12 +1,5 @@
 import type { ReactNode } from "react";
 
-export type PlaceholderVariant =
-  | "verto"
-  | "rank-tracker"
-  | "goldilox"
-  | "vejle"
-  | "portfolio";
-
 export type ProjectLink = {
   external?: boolean;
   href: string;

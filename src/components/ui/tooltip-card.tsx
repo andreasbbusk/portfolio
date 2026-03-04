@@ -1,5 +1,6 @@
 "use client";
-import React, { useState, useRef, useEffect } from "react";
+
+import React, { useEffect, useId, useRef, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { cn } from "@/utils/cn";
 
@@ -19,8 +20,10 @@ export const Tooltip = ({
     x: 0,
     y: 0,
   });
+
+  const tooltipId = useId();
   const contentRef = useRef<HTMLDivElement>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLSpanElement>(null);
   const hoverDelayTimeoutRef = useRef<number | null>(null);
   const pendingMouseRef = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
 
@@ -28,6 +31,163 @@ export const Tooltip = ({
     if (hoverDelayTimeoutRef.current !== null) {
       window.clearTimeout(hoverDelayTimeoutRef.current);
       hoverDelayTimeoutRef.current = null;
+    }
+  };
+
+  const hideTooltip = () => {
+    clearHoverDelayTimeout();
+    setMouse({ x: 0, y: 0 });
+    setPosition({ x: 0, y: 0 });
+    setIsVisible(false);
+  };
+
+  const calculatePosition = (mouseX: number, mouseY: number) => {
+    if (!contentRef.current || !containerRef.current) {
+      return { x: mouseX + 12, y: mouseY + 12 };
+    }
+
+    const tooltip = contentRef.current;
+    const container = containerRef.current;
+    const containerRect = container.getBoundingClientRect();
+    const viewportWidth = window.innerWidth;
+    const viewportHeight = window.innerHeight;
+
+    const tooltipWidth = 240;
+    const tooltipHeight = tooltip.scrollHeight;
+
+    const absoluteX = containerRect.left + mouseX;
+    const absoluteY = containerRect.top + mouseY;
+
+    let finalX = mouseX + 12;
+    let finalY = mouseY + 12;
+
+    if (absoluteX + 12 + tooltipWidth > viewportWidth) {
+      finalX = mouseX - tooltipWidth - 12;
+    }
+
+    if (absoluteX + finalX < 0) {
+      finalX = -containerRect.left + 12;
+    }
+
+    if (absoluteY + 12 + tooltipHeight > viewportHeight) {
+      finalY = mouseY - tooltipHeight - 12;
+    }
+
+    if (absoluteY + finalY < 0) {
+      finalY = -containerRect.top + 12;
+    }
+
+    return { x: finalX, y: finalY };
+  };
+
+  const updateMousePosition = (mouseX: number, mouseY: number) => {
+    setMouse({ x: mouseX, y: mouseY });
+    setPosition(calculatePosition(mouseX, mouseY));
+  };
+
+  const showTooltipAtCenter = () => {
+    const container = containerRef.current;
+
+    if (!container) {
+      setIsVisible(true);
+      return;
+    }
+
+    const rect = container.getBoundingClientRect();
+    const mouseX = rect.width / 2;
+    const mouseY = rect.height / 2;
+    updateMousePosition(mouseX, mouseY);
+    setIsVisible(true);
+  };
+
+  const handleMouseEnter = (e: React.MouseEvent<HTMLSpanElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const mouseX = e.clientX - rect.left;
+    const mouseY = e.clientY - rect.top;
+    pendingMouseRef.current = { x: mouseX, y: mouseY };
+    clearHoverDelayTimeout();
+
+    hoverDelayTimeoutRef.current = window.setTimeout(() => {
+      const { x, y } = pendingMouseRef.current;
+      updateMousePosition(x, y);
+      setIsVisible(true);
+      hoverDelayTimeoutRef.current = null;
+    }, 350);
+  };
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLSpanElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const mouseX = e.clientX - rect.left;
+    const mouseY = e.clientY - rect.top;
+
+    pendingMouseRef.current = { x: mouseX, y: mouseY };
+
+    if (!isVisible) return;
+    updateMousePosition(mouseX, mouseY);
+  };
+
+  const handleTouchStart = (e: React.TouchEvent<HTMLSpanElement>) => {
+    clearHoverDelayTimeout();
+    const touch = e.touches[0];
+
+    if (!touch) return;
+
+    const rect = e.currentTarget.getBoundingClientRect();
+    const mouseX = touch.clientX - rect.left;
+    const mouseY = touch.clientY - rect.top;
+    updateMousePosition(mouseX, mouseY);
+    setIsVisible(true);
+  };
+
+  const handleTouchEnd = () => {
+    window.setTimeout(() => {
+      hideTooltip();
+    }, 2000);
+  };
+
+  const handleClick = (e: React.MouseEvent<HTMLSpanElement>) => {
+    if (!window.matchMedia("(hover: none)").matches) return;
+
+    e.preventDefault();
+
+    if (isVisible) {
+      hideTooltip();
+      return;
+    }
+
+    const rect = e.currentTarget.getBoundingClientRect();
+    const mouseX = e.clientX - rect.left;
+    const mouseY = e.clientY - rect.top;
+    updateMousePosition(mouseX, mouseY);
+    setIsVisible(true);
+  };
+
+  const handleFocus = () => {
+    showTooltipAtCenter();
+  };
+
+  const handleBlur = (e: React.FocusEvent<HTMLSpanElement>) => {
+    if (e.currentTarget.contains(e.relatedTarget)) {
+      return;
+    }
+
+    hideTooltip();
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLSpanElement>) => {
+    if (e.key === "Escape") {
+      hideTooltip();
+      return;
+    }
+
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+
+      if (isVisible) {
+        hideTooltip();
+      } else {
+        showTooltipAtCenter();
+      }
     }
   };
 
@@ -43,128 +203,6 @@ export const Tooltip = ({
     }
   }, [isVisible, content]);
 
-  const calculatePosition = (mouseX: number, mouseY: number) => {
-    if (!contentRef.current || !containerRef.current)
-      return { x: mouseX + 12, y: mouseY + 12 };
-
-    const tooltip = contentRef.current;
-    const container = containerRef.current;
-    const containerRect = container.getBoundingClientRect();
-    const viewportWidth = window.innerWidth;
-    const viewportHeight = window.innerHeight;
-
-    // Get tooltip dimensions
-    const tooltipWidth = 240; // min-w-[15rem] = 240px
-    const tooltipHeight = tooltip.scrollHeight;
-
-    // Calculate absolute position relative to viewport
-    const absoluteX = containerRect.left + mouseX;
-    const absoluteY = containerRect.top + mouseY;
-
-    let finalX = mouseX + 12;
-    let finalY = mouseY + 12;
-
-    // Check if tooltip goes beyond right edge
-    if (absoluteX + 12 + tooltipWidth > viewportWidth) {
-      finalX = mouseX - tooltipWidth - 12;
-    }
-
-    // Check if tooltip goes beyond left edge
-    if (absoluteX + finalX < 0) {
-      finalX = -containerRect.left + 12;
-    }
-
-    // Check if tooltip goes beyond bottom edge
-    if (absoluteY + 12 + tooltipHeight > viewportHeight) {
-      finalY = mouseY - tooltipHeight - 12;
-    }
-
-    // Check if tooltip goes beyond top edge
-    if (absoluteY + finalY < 0) {
-      finalY = -containerRect.top + 12;
-    }
-
-    return { x: finalX, y: finalY };
-  };
-
-  const updateMousePosition = (mouseX: number, mouseY: number) => {
-    setMouse({ x: mouseX, y: mouseY });
-    const newPosition = calculatePosition(mouseX, mouseY);
-    setPosition(newPosition);
-  };
-
-  const handleMouseEnter = (e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const mouseX = e.clientX - rect.left;
-    const mouseY = e.clientY - rect.top;
-    pendingMouseRef.current = { x: mouseX, y: mouseY };
-    clearHoverDelayTimeout();
-
-    hoverDelayTimeoutRef.current = window.setTimeout(() => {
-      const { x, y } = pendingMouseRef.current;
-      setIsVisible(true);
-      updateMousePosition(x, y);
-      hoverDelayTimeoutRef.current = null;
-    }, 350);
-  };
-
-  const handleMouseLeave = () => {
-    clearHoverDelayTimeout();
-    setMouse({ x: 0, y: 0 });
-    setPosition({ x: 0, y: 0 });
-    setIsVisible(false);
-  };
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const mouseX = e.clientX - rect.left;
-    const mouseY = e.clientY - rect.top;
-
-    pendingMouseRef.current = { x: mouseX, y: mouseY };
-
-    if (!isVisible) return;
-    updateMousePosition(mouseX, mouseY);
-  };
-
-  const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
-    clearHoverDelayTimeout();
-    const touch = e.touches[0];
-    const rect = e.currentTarget.getBoundingClientRect();
-    const mouseX = touch.clientX - rect.left;
-    const mouseY = touch.clientY - rect.top;
-    updateMousePosition(mouseX, mouseY);
-    setIsVisible(true);
-  };
-
-  const handleTouchEnd = () => {
-    // Delay hiding to allow for tap interaction
-    setTimeout(() => {
-      setIsVisible(false);
-      setMouse({ x: 0, y: 0 });
-      setPosition({ x: 0, y: 0 });
-    }, 2000);
-  };
-
-  const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    // Toggle visibility on click for mobile devices
-    if (window.matchMedia("(hover: none)").matches) {
-      e.preventDefault();
-      clearHoverDelayTimeout();
-      if (isVisible) {
-        setIsVisible(false);
-        setMouse({ x: 0, y: 0 });
-        setPosition({ x: 0, y: 0 });
-      } else {
-        const rect = e.currentTarget.getBoundingClientRect();
-        const mouseX = e.clientX - rect.left;
-        const mouseY = e.clientY - rect.top;
-        updateMousePosition(mouseX, mouseY);
-        setIsVisible(true);
-      }
-    }
-  };
-
-  // Update position when tooltip becomes visible or content changes
   useEffect(() => {
     if (!isVisible || !contentRef.current) return;
 
@@ -177,21 +215,30 @@ export const Tooltip = ({
   }, [isVisible, height, mouse.x, mouse.y]);
 
   return (
-    <div
+    <span
       ref={containerRef}
+      role="button"
+      tabIndex={0}
+      aria-expanded={isVisible}
+      aria-describedby={isVisible ? tooltipId : undefined}
       className={cn("relative inline-block", containerClassName)}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-      onMouseMove={handleMouseMove}
-      onTouchStart={handleTouchStart}
-      onTouchEnd={handleTouchEnd}
+      onBlur={handleBlur}
       onClick={handleClick}
+      onFocus={handleFocus}
+      onKeyDown={handleKeyDown}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={hideTooltip}
+      onMouseMove={handleMouseMove}
+      onTouchEnd={handleTouchEnd}
+      onTouchStart={handleTouchStart}
     >
       {children}
       <AnimatePresence>
         {isVisible && (
           <motion.div
-            key={String(isVisible)}
+            key={tooltipId}
+            id={tooltipId}
+            role="tooltip"
             initial={{ height: 0, opacity: 1 }}
             animate={{ height, opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
@@ -215,6 +262,6 @@ export const Tooltip = ({
           </motion.div>
         )}
       </AnimatePresence>
-    </div>
+    </span>
   );
 };

@@ -14,7 +14,10 @@ export function WorksPreviewMediaFirstRow({
 }) {
   return (
     <div className="grid gap-10 lg:grid-cols-[minmax(0,1.78fr)_minmax(320px,0.9fr)] lg:items-center lg:gap-16">
-      <SafariPlaceholderFrame url={feature.url} variant={feature.variant} />
+      <SafariPlaceholderFrame
+        imageSrc={feature.previewImageSrc}
+        url={feature.url}
+      />
 
       <div className={cn("lg:self-center", feature.metaClassName)}>
         <WorksPreviewMeta {...feature.meta} />
@@ -36,8 +39,8 @@ export function WorksPreviewMetaFirstRow({
 
       <SafariPlaceholderFrame
         className={feature.mediaClassName}
+        imageSrc={feature.previewImageSrc}
         url={feature.url}
-        variant={feature.variant}
       />
     </div>
   );
@@ -54,8 +57,8 @@ export function WorksPreviewStackedColumnFeature({
     <div className={cn("grid content-start gap-7", className)}>
       <SafariPlaceholderFrame
         className={feature.mediaClassName}
+        imageSrc={feature.previewImageSrc}
         url={feature.url}
-        variant={feature.variant}
       />
 
       <div className={feature.metaClassName}>
@@ -73,7 +76,7 @@ export function WorksPreviewPortfolioCard({
   return (
     <div className="mx-auto w-full max-w-[980px] lg:w-[60%] lg:max-w-none">
       <div className="grid gap-8">
-        <SafariPlaceholderFrame url={feature.url} variant={feature.variant} />
+        <SafariPlaceholderFrame url={feature.url} />
 
         <div className="mx-auto grid max-w-[56ch] justify-items-center gap-4 text-center">
           <h3 className="text-3xl leading-[0.95] tracking-[-0.035em] font-normal text-neutral-950 sm:text-4xl">

@@ -17,15 +17,15 @@ const PageLoader = dynamic(
   },
 );
 
-interface LayoutEffectsProps {
+type LayoutEffectsProps = {
   initialShowLoader: boolean;
-}
+};
 
 export function LayoutEffects({ initialShowLoader }: LayoutEffectsProps) {
   const [showLoader, setShowLoader] = useState(initialShowLoader);
 
   useEffect(() => {
-    if (!showLoader) {
+    if (showLoader === false) {
       document.documentElement.classList.remove("page-loading");
     }
   }, [showLoader]);
@@ -37,7 +37,7 @@ export function LayoutEffects({ initialShowLoader }: LayoutEffectsProps) {
 
   return (
     <>
-      <SmoothScroll disabled={showLoader} />
+      <SmoothScroll disabled={showLoader !== false} />
       {showLoader && <PageLoader onComplete={handleLoadingComplete} />}
     </>
   );

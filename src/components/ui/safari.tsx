@@ -1,5 +1,6 @@
 import Image from "next/image"
 import type { HTMLAttributes } from "react"
+import { BLUR_DATA_URL } from "@/utils/image-placeholder"
 
 const SAFARI_WIDTH = 1203
 const SAFARI_HEIGHT = 753
@@ -60,7 +61,7 @@ export function Safari({
           style={SCREEN_VIEWPORT_STYLE}
         >
           <video
-            className="block size-full object-cover"
+            className="block size-full object-cover object-left-top"
             src={videoSrc}
             autoPlay
             loop
@@ -81,8 +82,10 @@ export function Safari({
             alt=""
             fill
             unoptimized
+            placeholder="blur"
+            blurDataURL={BLUR_DATA_URL}
             sizes="100vw"
-            className="object-cover object-top"
+            className="object-cover object-left-top"
           />
         </div>
       )}

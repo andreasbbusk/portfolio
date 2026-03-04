@@ -11,7 +11,15 @@ export const CONTACT_MESSAGE =
 
 export const CONTACT_LINKS = [
   { label: "Download CV", href: "/cv.pdf" },
-  { label: "LinkedIn", href: "https://linkedin.com", external: true },
-  { label: "GitHub", href: "https://github.com", external: true },
+  {
+    label: "LinkedIn",
+    href: "https://linkedin.com/in/andreas-busk-mikkelsen",
+    external: true,
+  },
+  {
+    label: "GitHub",
+    href: "https://github.com/andreasbbusk",
+    external: true,
+  },
   { label: "Candeno", href: "https://candeno.com", external: true },
 ] as const satisfies readonly ContactLink[];

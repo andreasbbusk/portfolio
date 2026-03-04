@@ -13,6 +13,10 @@ export const heroCopy = {
   ],
   ctas: [
     { label: "Download CV", href: "/cv.pdf" },
-    { label: "LinkedIn", href: "https://linkedin.com", external: true },
+    {
+      label: "LinkedIn",
+      href: "https://linkedin.com/in/andreas-busk-mikkelsen",
+      external: true,
+    },
   ] satisfies HeroLink[],
 };
