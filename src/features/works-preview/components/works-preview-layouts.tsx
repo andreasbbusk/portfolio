@@ -15,6 +15,7 @@ export function WorksPreviewMediaFirstRow({
   return (
     <div className="grid gap-10 lg:grid-cols-[minmax(0,1.78fr)_minmax(320px,0.9fr)] lg:items-center lg:gap-16">
       <SafariPlaceholderFrame
+        href={feature.meta.primaryLink.href}
         imageSrc={feature.previewImageSrc}
         url={feature.url}
       />
@@ -39,6 +40,7 @@ export function WorksPreviewMetaFirstRow({
 
       <SafariPlaceholderFrame
         className={feature.mediaClassName}
+        href={feature.meta.primaryLink.href}
         imageSrc={feature.previewImageSrc}
         url={feature.url}
       />
@@ -57,6 +59,7 @@ export function WorksPreviewStackedColumnFeature({
     <div className={cn("grid content-start gap-7", className)}>
       <SafariPlaceholderFrame
         className={feature.mediaClassName}
+        href={feature.meta.primaryLink.href}
         imageSrc={feature.previewImageSrc}
         url={feature.url}
       />
