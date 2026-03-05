@@ -15,8 +15,21 @@ export const CASE_STUDIES: CaseStudy[] = [
       liveLabel: "verto-zeta.vercel.app",
     },
     heroImage: {
-      src: "/images/works/verto-1.webp",
-      alt: "Verto dashboard showing the flashcard sets library and study interface",
+      src: "/images/works/verto-thumbnail.svg",
+      alt: "Verto branded thumbnail with logo and yellow background",
+    },
+    liveDemo: {
+      embedUrl: "https://verto-zeta.vercel.app/demo/embed",
+      launchUrl: "https://verto-zeta.vercel.app",
+      title: "Verto live demo",
+      posterImage: {
+        src: "/images/works/verto-thumbnail.svg",
+        alt: "Verto branded thumbnail with logo and yellow background",
+      },
+      aspectRatio: "16/9",
+      timeoutMs: 8000,
+      ctaLabel: "Play Live Demo",
+      fallbackLabel: "Open in New Tab",
     },
     narrative: [
       {
@@ -95,8 +108,8 @@ export const useStudyProgressStore = create<StudyProgressState>()(
       sourceLabel: "hub.conversio.dk",
     },
     heroImage: {
-      src: "/images/works/rank-tracker-1.webp",
-      alt: "Rank Tracker dashboard with scorecards, position graphs, and keyword tables",
+      src: "/images/works/rank-tracker-thumbnail.svg",
+      alt: "Rank Tracker branded thumbnail with logo and blue background",
     },
     narrative: [
       {

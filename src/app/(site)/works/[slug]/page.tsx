@@ -8,6 +8,7 @@ import {
 import {
   CaseStudyHero,
   CaseStudyHeroImage,
+  CaseStudyLiveDemo,
   CaseStudyNarrative,
   CaseStudyVisuals,
   CaseStudyProjectNav,
@@ -63,8 +64,12 @@ export default async function CaseStudyPage({ params }: PageProps) {
         meta={study.meta}
       />
 
-      {/* 2. The Hero Image Anchor */}
-      <CaseStudyHeroImage image={study.heroImage} bleed="right" />
+      {/* 2. Hero media: live demo (if configured) or static hero image */}
+      {study.liveDemo ? (
+        <CaseStudyLiveDemo demo={study.liveDemo} />
+      ) : (
+        <CaseStudyHeroImage image={study.heroImage} bleed="right" />
+      )}
 
       {/* 3. The Narrative Content: Structured Columns */}
       <CaseStudyNarrative blocks={study.narrative} />

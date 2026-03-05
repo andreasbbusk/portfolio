@@ -20,9 +20,9 @@ export type WorksPreviewPortfolioFeature = {
 
 export const VERTO_WORK: WorksPreviewFeature = {
   url: "verto-zeta.vercel.app",
-  previewImageSrc: "/images/works/verto-1.webp",
+  previewImageSrc: "/images/works/verto-thumbnail.svg",
   previewImageAlt:
-    "Verto study session preview with flashcard interface and keyboard-first controls",
+    "Verto branded thumbnail with logo and yellow background",
   meta: {
     title: "Verto",
     description:
@@ -34,9 +34,9 @@ export const VERTO_WORK: WorksPreviewFeature = {
 
 export const RANK_TRACKER_WORK: WorksPreviewFeature = {
   url: "rank-tracker-flax.vercel.app",
-  previewImageSrc: "/images/works/rank-tracker-1.webp",
+  previewImageSrc: "/images/works/rank-tracker-thumbnail.svg",
   previewImageAlt:
-    "Rank Tracker dashboard preview with performance scorecards and trend graph",
+    "Rank Tracker branded thumbnail with logo and blue background",
   mediaClassName: "lg:mt-16",
   metaClassName: "lg:mt-12",
   meta: {

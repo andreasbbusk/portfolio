@@ -28,6 +28,20 @@ export type CaseStudyImage = {
   backing?: "white" | "gray";
 };
 
+export type CaseStudyLiveDemo = {
+  embedUrl: string;
+  launchUrl: string;
+  title: string;
+  posterImage: {
+    src: string;
+    alt: string;
+  };
+  aspectRatio: "16/10" | "16/9" | "4/3";
+  timeoutMs?: number;
+  ctaLabel?: string;
+  fallbackLabel?: string;
+};
+
 export type CaseStudy = {
   slug: string;
   title: string;
@@ -36,6 +50,7 @@ export type CaseStudy = {
   meta: CaseStudyMeta;
   heroImage: CaseStudyImage;
   narrative: CaseStudyNarrativeBlock[];
+  liveDemo?: CaseStudyLiveDemo;
   secondaryImages?: CaseStudyImage[];
   codeBlocks?: CaseStudyCodeBlock[];
   nextProject?: {
