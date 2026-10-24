@@ -9,7 +9,7 @@ interface PageLoaderProps {
   onComplete?: () => void;
 }
 
-const LOADER_FAILSAFE_MS = 6500;
+const LOADER_FAILSAFE_MS = 3500;
 
 export function PageLoader({ onComplete }: PageLoaderProps) {
   const [isVisible, setIsVisible] = useState(true);
@@ -20,6 +20,7 @@ export function PageLoader({ onComplete }: PageLoaderProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const progressBarRef = useRef<HTMLDivElement>(null);
   const logoRef = useRef<HTMLDivElement>(null);
+  const timelineRef = useRef<gsap.core.Timeline | null>(null);
 
   useEffect(() => {
     const wrap = wrapRef.current;
@@ -68,17 +69,18 @@ export function PageLoader({ onComplete }: PageLoaderProps) {
         ease: "power4.inOut",
       },
     });
+    timelineRef.current = timeline;
 
     timeline
       .to(progressBar, {
         scaleX: 1,
-        duration: 3.3,
+        duration: 1.1,
       })
       .to(
         logo,
         {
           clipPath: "inset(0% 0% 0% 0%)",
-          duration: 3.3,
+          duration: 1.1,
         },
         "<",
       )
@@ -88,7 +90,7 @@ export function PageLoader({ onComplete }: PageLoaderProps) {
           autoAlpha: 0,
           duration: 0.5,
         },
-        "+=0.6",
+        "+=0.15",
       )
       .to(
         progressBar,
@@ -139,8 +141,24 @@ export function PageLoader({ onComplete }: PageLoaderProps) {
         failsafeRef.current = null;
       }
       timeline.kill();
+      timelineRef.current = null;
     };
   }, [onComplete]);
+
+  // Skippable: any click or key press fast-forwards the timeline.
+  useEffect(() => {
+    const skip = () => {
+      timelineRef.current?.timeScale(4);
+    };
+
+    window.addEventListener("pointerdown", skip, { once: true });
+    window.addEventListener("keydown", skip, { once: true });
+
+    return () => {
+      window.removeEventListener("pointerdown", skip);
+      window.removeEventListener("keydown", skip);
+    };
+  }, []);
 
   if (!isVisible) {
     return null;
