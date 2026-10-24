@@ -24,14 +24,11 @@ import {
 } from "@/components/ui/accordion";
 import { cn } from "@/utils/cn";
 
-/**
- * Kandinsky's form–colour correspondence (Bauhaus, 1923):
- * Triangle → Yellow · Square → Red · Circle → Blue
- */
-const BAUHAUS_MARKERS = [
-  <svg key="triangle" aria-hidden="true" width="8" height="7" viewBox="0 0 8 7" className="shrink-0"><polygon points="4,0 8,7 0,7" fill="#D4A72C" /></svg>,
-  <svg key="square" aria-hidden="true" width="7" height="7" viewBox="0 0 7 7" className="shrink-0"><rect width="7" height="7" fill="#dd2f20" /></svg>,
-  <svg key="circle" aria-hidden="true" width="8" height="8" viewBox="0 0 8 8" className="shrink-0"><circle cx="4" cy="4" r="4" fill="#264491" /></svg>,
+/** Section markers: one quiet square per section, alternating signal and ink. */
+const SECTION_MARKERS = [
+  <svg key="a" aria-hidden="true" width="7" height="7" viewBox="0 0 7 7" className="shrink-0"><rect width="7" height="7" fill="#b0600d" /></svg>,
+  <svg key="b" aria-hidden="true" width="7" height="7" viewBox="0 0 7 7" className="shrink-0"><rect width="7" height="7" fill="#b0600d" /></svg>,
+  <svg key="c" aria-hidden="true" width="7" height="7" viewBox="0 0 7 7" className="shrink-0"><rect width="7" height="7" fill="#1b1813" /></svg>,
 ];
 
 type AboutBlockPanelProps = {
@@ -46,24 +43,24 @@ function AboutAccordionBody({ block }: { block: AboutAccordionBlock }) {
       type="single"
       collapsible
       defaultValue={`${block.catalogLabel}-0`}
-      className="w-full border-b border-black/10"
+      className="w-full border-b border-ink/10"
     >
       {block.items.map((item, lineIndex) => (
         <AccordionItem
           key={`${block.catalogLabel}-${lineIndex}`}
           value={`${block.catalogLabel}-${lineIndex}`}
-          className="border-black/10 py-1 sm:py-1.5"
+          className="border-ink/10 py-1 sm:py-1.5"
         >
           <AccordionTrigger
             className={cn(
               homepageSansFontClass,
-              "rounded-none border-0 bg-transparent px-0 py-5 sm:py-6 text-[clamp(17px,1.35vw,25px)] leading-[1.3] tracking-[-0.01em] text-[#09090a] no-underline hover:no-underline focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:border-transparent [&>svg]:size-5 [&>svg]:text-black/40 [&[data-state=open]_.accordion-accent]:border-[#dd2f20] [&[data-state=open]_.accordion-accent]:bg-[#dd2f20]",
+              "rounded-none border-0 bg-transparent px-0 py-5 sm:py-6 text-[clamp(17px,1.35vw,25px)] leading-[1.3] tracking-[-0.01em] text-ink no-underline hover:no-underline focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:border-transparent [&>svg]:size-5 [&>svg]:text-ink/40 [&[data-state=open]_.accordion-accent]:border-signal [&[data-state=open]_.accordion-accent]:bg-signal",
             )}
           >
             <span className="flex min-w-0 items-start gap-4 pr-4">
               <span
                 aria-hidden="true"
-                className="accordion-accent mt-[0.34em] size-3 shrink-0 border border-black/20 bg-transparent transition-colors duration-150"
+                className="accordion-accent mt-[0.34em] size-3 shrink-0 border border-ink/20 bg-transparent transition-colors duration-150"
               />
               <span className="min-w-0">{item.summary}</span>
             </span>
@@ -72,7 +69,7 @@ function AboutAccordionBody({ block }: { block: AboutAccordionBlock }) {
             <p
               className={cn(
                 homepageSansFontClass,
-                "max-w-[96ch] pr-8 text-[clamp(16px,1.15vw,20px)] leading-relaxed text-black/62",
+                "max-w-[96ch] pr-8 text-[clamp(16px,1.15vw,20px)] leading-relaxed text-ink/62",
               )}
             >
               {item.detail}
@@ -211,10 +208,10 @@ export function AboutBlockPanel({
       ? "mx-auto w-full max-w-[88ch] text-left"
       : "w-full max-w-[88ch]";
   const contentFrameClass = isAccordionBlock
-    ? "relative overflow-hidden bg-white/55"
+    ? "relative overflow-hidden bg-card/55"
     : isCenteredEditorialFrame
-      ? "relative mx-1 mt-1 overflow-hidden border border-black/10 bg-white sm:mx-2 sm:mt-2 md:mx-4 md:mt-3 lg:mx-6"
-      : "relative overflow-hidden border border-black/10 bg-white/55";
+      ? "relative mx-1 mt-1 overflow-hidden border border-ink/10 bg-card sm:mx-2 sm:mt-2 md:mx-4 md:mt-3 lg:mx-6"
+      : "relative overflow-hidden border border-ink/10 bg-card/55";
   const contentFrameGridClass = isCenteredEditorialFrame
     ? "grid px-8 py-12 sm:px-12 sm:py-16 md:px-0 md:py-0"
     : "grid px-8 py-10 sm:px-12 sm:py-14 md:px-0 md:py-0";
@@ -240,7 +237,7 @@ export function AboutBlockPanel({
                 }
                 className={cn(
                   homepageSansFontClass,
-                  "max-w-[20ch] text-[clamp(40px,5.5vw,72px)] leading-[0.95] tracking-[-0.03em] font-semibold text-[#09090a]",
+                  "max-w-[20ch] text-[clamp(40px,5.5vw,72px)] leading-[0.95] tracking-[-0.03em] font-semibold text-ink",
                 )}
               >
                 {block.headline}
@@ -253,8 +250,8 @@ export function AboutBlockPanel({
                 }
                 className="flex items-start gap-2 pt-1 sm:flex-col sm:items-end sm:gap-2.5"
               >
-                <p className="flex items-center gap-2 [font-family:var(--font-dm-mono)] text-[13px] tracking-[0.14em] text-[#7e8087] sm:justify-end sm:text-sm">
-                  <span className="mt-px">{BAUHAUS_MARKERS[blockIndex % 3]}</span>
+                <p className="flex items-center gap-2 [font-family:var(--font-dm-mono)] text-[13px] tracking-[0.14em] text-[#7b7466] sm:justify-end sm:text-sm">
+                  <span className="mt-px">{SECTION_MARKERS[blockIndex % 3]}</span>
                   <span>
                     {chapterIndexLabel} / {chapterTotalLabel} {"\u2014"}{" "}
                     {chapterName}
@@ -262,11 +259,11 @@ export function AboutBlockPanel({
                 </p>
                 <span
                   aria-hidden="true"
-                  className="relative mt-0.5 h-px w-[46px] shrink-0 bg-black/12 sm:mt-0"
+                  className="relative mt-0.5 h-px w-[46px] shrink-0 bg-ink/12 sm:mt-0"
                 >
                   <motion.span
                     style={{ scaleX: chapterProgress }}
-                    className="absolute inset-0 origin-left bg-[#09090a]/70"
+                    className="absolute inset-0 origin-left bg-ink/70"
                   />
                 </span>
               </motion.div>
@@ -275,7 +272,7 @@ export function AboutBlockPanel({
               {showOffsetPlane ? (
                 <span
                   aria-hidden="true"
-                  className="pointer-events-none absolute inset-0 translate-x-[40px] translate-y-[40px] bg-[#F5F5F3]"
+                  className="pointer-events-none absolute inset-0 translate-x-[40px] translate-y-[40px] bg-paper-deep"
                 />
               ) : null}
               <div className={cn(contentFrameClass, showOffsetPlane && "z-10")}>

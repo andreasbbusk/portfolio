@@ -109,7 +109,7 @@ export function Pointer({
                       width="24"
                       xmlns="http://www.w3.org/2000/svg"
                       className={cn(
-                        "rotate-[-70deg] stroke-white text-black",
+                        "rotate-[-70deg] stroke-paper text-ink",
                         className
                       )}
                     >

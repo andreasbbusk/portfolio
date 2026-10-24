@@ -53,7 +53,7 @@ export default async function CaseStudyPage({ params }: PageProps) {
   const previousProject = getPreviousProject(study.slug);
 
   return (
-    <article className="text-[#09090a] [font-family:var(--font-dm-sans)]">
+    <article className="text-ink [font-family:var(--font-dm-sans)]">
       {/* Fixed reading progress bar */}
       <CaseStudyProgress />
 
@@ -80,19 +80,19 @@ export default async function CaseStudyPage({ params }: PageProps) {
         codeBlocks={study.codeBlocks}
       />
 
-      {/* Bauhaus end mark — Kandinsky's three forms */}
+      {/* end mark*/}
       <div
         aria-hidden="true"
         className="flex items-center justify-center gap-4 py-12"
       >
         <svg width="8" height="7" viewBox="0 0 8 7">
-          <polygon points="4,0 8,7 0,7" fill="#D4A72C" opacity="0.3" />
+          <rect width="7" height="7" fill="#b0600d" opacity="0.3" />
         </svg>
         <svg width="7" height="7" viewBox="0 0 7 7">
-          <rect width="7" height="7" fill="#dd2f20" opacity="0.3" />
+          <rect width="7" height="7" fill="#b0600d" opacity="0.3" />
         </svg>
         <svg width="8" height="8" viewBox="0 0 8 8">
-          <circle cx="4" cy="4" r="4" fill="#264491" opacity="0.3" />
+          <rect width="7" height="7" fill="#1b1813" opacity="0.3" />
         </svg>
       </div>
 

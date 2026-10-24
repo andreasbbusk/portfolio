@@ -20,25 +20,22 @@ function Header() {
         ${isVisible ? "translate-y-0" : "-translate-y-full"}
       `}
     >
-      {/* Bauhaus compound rule — tri-color segments into architectural line */}
+      {/* Hairline rule — tri-color segments into architectural line */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute left-3 right-3 top-[8px] flex h-[2px] overflow-hidden sm:left-5 sm:right-5 sm:top-[10px]"
       >
-        <div className="w-7 bg-[#dd2f20]" />
-        <div className="w-7 bg-[#264491]" />
-        <div className="w-7 bg-[#D4A72C]" />
-        <div className="flex-1 bg-[#09090a]" />
+        <div className="flex-1 bg-ink" />
       </div>
       <div className="grid h-full grid-cols-[1fr_auto_1fr] items-center px-3 pt-2 sm:px-5 sm:pt-3">
         <Link
           href="/"
-          className="group inline-flex items-center gap-2.5 text-black/68 justify-self-start"
+          className="group inline-flex items-center gap-2.5 text-ink/68 justify-self-start"
         >
-          {/* Bauhaus square marker — Kandinsky red */}
+          {/* square marker*/}
           <span
             aria-hidden="true"
-            className="size-[7px] shrink-0 bg-[#dd2f20]"
+            className="size-[7px] shrink-0 bg-signal"
           />
           <HeaderRoll
             text="Andreas Busk Mikkelsen"

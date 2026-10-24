@@ -22,7 +22,7 @@ const EASE = [0.22, 1, 0.36, 1] as const;
  * Split into two distinct sections:
  * 1. Light section: secondary screenshots on measured, solid-colored backing cards
  *    with staggered scroll-reveal animation per card.
- * 2. Dark section: full-width near-black (#09090a) background for code blocks
+ * 2. Dark section: full-width near-black (#1b1813) background for code blocks
  *    with inverted typography. A dramatic visual shift that creates contrast.
  */
 export function CaseStudyVisuals({
@@ -66,14 +66,14 @@ export function CaseStudyVisuals({
                   }}
                   className={cn(
                     "relative p-6 md:p-8 lg:p-10",
-                    image.backing === "gray" ? "bg-[#F5F5F3]" : "bg-white",
+                    image.backing === "gray" ? "bg-paper-deep" : "bg-card",
                     /* Border only on white cards for contrast against page bg */
-                    image.backing !== "gray" && "border border-[#09090a]/10",
+                    image.backing !== "gray" && "border border-ink/10",
                     /* Overlap effect: second card nudges up on desktop */
                     images.length > 1 && i === 1 && "md:mt-12",
                   )}
                 >
-                  <div className="relative aspect-[16/10] w-full overflow-hidden bg-white">
+                  <div className="relative aspect-[16/10] w-full overflow-hidden bg-card">
                     <Image
                       src={image.src}
                       alt={image.alt}
@@ -89,7 +89,7 @@ export function CaseStudyVisuals({
                     />
                   </div>
                   {image.caption && (
-                    <p className="mt-4 font-mono text-[11px] uppercase tracking-[0.15em] text-[#7e8087]">
+                    <p className="mt-4 font-mono text-[11px] uppercase tracking-[0.15em] text-[#7b7466]">
                       {image.caption}
                     </p>
                   )}
@@ -102,10 +102,10 @@ export function CaseStudyVisuals({
 
       {/* ── Dark section: code blocks ── */}
       {hasCode && (
-        <section className="bg-[#09090a] py-[clamp(64px,8vw,128px)]">
+        <section className="bg-ink py-[clamp(64px,8vw,128px)]">
           <div className="mx-auto w-full max-w-[1680px] px-6 md:px-12">
             {/* Eyebrow label */}
-            <p className="mb-8 font-mono text-[11px] uppercase tracking-[0.18em] text-white/40 md:mb-12">
+            <p className="mb-8 font-mono text-[11px] uppercase tracking-[0.18em] text-paper/40 md:mb-12">
               Source Code
             </p>
 
@@ -116,23 +116,23 @@ export function CaseStudyVisuals({
               >
                 {/* File label bar — dark variant */}
                 {block.filename && (
-                  <div className="border border-b-0 border-white/15 bg-white/[0.05] px-5 py-3">
-                    <p className="flex items-center font-mono text-[12px] tracking-[0.05em] text-white/80">
+                  <div className="border border-b-0 border-paper/15 bg-card/[0.05] px-5 py-3">
+                    <p className="flex items-center font-mono text-[12px] tracking-[0.05em] text-paper/80">
                       <span
                         aria-hidden="true"
-                        className="mr-3 inline-block h-[7px] w-[7px] bg-[#dd2f20]"
+                        className="mr-3 inline-block h-[7px] w-[7px] bg-signal"
                       />
                       {block.filename}
-                      <span className="ml-3 text-white/35">
+                      <span className="ml-3 text-paper/35">
                         {block.language}
                       </span>
                     </p>
                   </div>
                 )}
                 {/* Code content — inverted brutalist style */}
-                <div className="border border-white/15 bg-white/[0.03]">
+                <div className="border border-paper/15 bg-card/[0.03]">
                   <pre className="overflow-x-auto p-5 md:p-6">
-                    <code className="font-mono text-[13px] leading-[1.7] text-white/80">
+                    <code className="font-mono text-[13px] leading-[1.7] text-paper/80">
                       {block.code}
                     </code>
                   </pre>

@@ -247,7 +247,7 @@ export const Tooltip = ({
               stiffness: 200,
               damping: 20,
             }}
-            className="pointer-events-none absolute z-50 min-w-60 overflow-hidden rounded-xl border border-black/15 bg-white"
+            className="pointer-events-none absolute z-50 min-w-60 overflow-hidden rounded-xl border border-ink/15 bg-card"
             style={{
               top: position.y,
               left: position.x,
@@ -255,7 +255,7 @@ export const Tooltip = ({
           >
             <div
               ref={contentRef}
-              className="[font-family:var(--font-dm-sans)] px-3 py-2.5 text-[13px] leading-snug tracking-[-0.01em] text-neutral-950 md:px-4 md:py-3 md:text-sm"
+              className="[font-family:var(--font-dm-sans)] px-3 py-2.5 text-[13px] leading-snug tracking-[-0.01em] text-ink md:px-4 md:py-3 md:text-sm"
             >
               {content}
             </div>

@@ -22,11 +22,11 @@ export function ContactFooterSection() {
   return (
     <footer
       id="contact-footer"
-      className="relative mt-[clamp(48px,10vw,128px)] overflow-hidden bg-transparent text-[#09090a]"
+      className="relative mt-[clamp(48px,10vw,128px)] overflow-hidden bg-transparent text-ink"
     >
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute bottom-0 left-1/2 z-0 h-[128vw] w-[240vw] min-h-[980px] min-w-[2200px] -translate-x-1/2 translate-y-[58%] rounded-[50%] bg-[#F9F9F8]"
+        className="pointer-events-none absolute bottom-0 left-1/2 z-0 h-[128vw] w-[240vw] min-h-[980px] min-w-[2200px] -translate-x-1/2 translate-y-[58%] rounded-[50%] bg-[#f7f4ec]"
       />
 
       <div className="relative z-10 flex min-h-screen flex-col">
@@ -47,7 +47,7 @@ export function ContactFooterSection() {
               <h2
                 className={cn(
                   homepageSansFontClass,
-                  "text-7xl font-semibold leading-none tracking-tighter text-neutral-950 sm:text-8xl md:text-[10vw]",
+                  "text-7xl font-semibold leading-none tracking-tighter text-ink sm:text-8xl md:text-[10vw]",
                 )}
               >
                 Let&apos;s work.
@@ -56,7 +56,7 @@ export function ContactFooterSection() {
               <p
                 className={cn(
                   homepageSansFontClass,
-                  "mx-auto mt-8 max-w-xl text-center text-lg leading-relaxed text-neutral-600 sm:text-xl",
+                  "mx-auto mt-8 max-w-xl text-center text-lg leading-relaxed text-ink/65 sm:text-xl",
                 )}
               >
                 {CONTACT_MESSAGE}
@@ -71,31 +71,31 @@ export function ContactFooterSection() {
                   hrefPrefix="mailto:"
                   className={cn(
                     homepageSansFontClass,
-                    "inline-flex items-center text-[clamp(1.2rem,2.8vw,2.25rem)] font-medium leading-tight tracking-[-0.03em] text-neutral-900 hover:text-black focus-visible:text-black",
+                    "inline-flex items-center text-[clamp(1.2rem,2.8vw,2.25rem)] font-medium leading-tight tracking-[-0.03em] text-ink hover:text-ink focus-visible:text-ink",
                   )}
                 />
                 <InlineCopyLinkButton
                   copyAriaLabel="Copy email address"
-                  className="h-6 text-[13px] text-neutral-500 hover:text-neutral-900 focus-visible:text-neutral-900 focus-visible:max-w-[104px] group-hover/inline-copy:max-w-[104px] [&_svg]:size-4"
+                  className="h-6 text-[13px] text-ink/55 hover:text-ink focus-visible:text-ink focus-visible:max-w-[104px] group-hover/inline-copy:max-w-[104px] [&_svg]:size-4"
                 />
               </InlineCopyLink>
             </motion.div>
           </div>
         </div>
 
-        {/* Kandinsky end mark — page signature, mirrors case study endings */}
+        {/* end mark — page signature, mirrors case study endings */}
         <div
           aria-hidden="true"
           className="flex items-center justify-center gap-4 pb-10"
         >
           <svg width="8" height="7" viewBox="0 0 8 7">
-            <polygon points="4,0 8,7 0,7" fill="#D4A72C" opacity="0.3" />
+            <rect width="7" height="7" fill="#b0600d" opacity="0.3" />
           </svg>
           <svg width="7" height="7" viewBox="0 0 7 7">
-            <rect width="7" height="7" fill="#dd2f20" opacity="0.3" />
+            <rect width="7" height="7" fill="#b0600d" opacity="0.3" />
           </svg>
           <svg width="8" height="8" viewBox="0 0 8 8">
-            <circle cx="4" cy="4" r="4" fill="#264491" opacity="0.3" />
+            <rect width="7" height="7" fill="#1b1813" opacity="0.3" />
           </svg>
         </div>
 
@@ -108,23 +108,20 @@ export function ContactFooterSection() {
           className="relative z-20 mt-auto"
         >
           <div className="relative px-3 pb-3 pt-4 sm:px-5 sm:pb-4 sm:pt-0">
-            {/* Bauhaus compound rule — tri-color segments into architectural line */}
+            {/* Hairline rule — tri-color segments into architectural line */}
             <div
               aria-hidden="true"
               className="pointer-events-none absolute bottom-[8px] left-3 right-3 flex h-[2px] overflow-hidden sm:bottom-[10px] sm:left-5 sm:right-5"
             >
-              <div className="w-7 bg-[#dd2f20]" />
-              <div className="w-7 bg-[#264491]" />
-              <div className="w-7 bg-[#D4A72C]" />
-              <div className="flex-1 bg-[#09090a]" />
+              <div className="flex-1 bg-ink" />
             </div>
 
-            <div className="relative grid gap-3 pb-4 font-mono text-[11px] leading-none font-medium uppercase tracking-[0.14em] text-black/68 sm:h-[48px] sm:grid-cols-[1fr_auto] sm:items-center sm:gap-6 sm:pb-0 sm:text-[12px]">
+            <div className="relative grid gap-3 pb-4 font-mono text-[11px] leading-none font-medium uppercase tracking-[0.14em] text-ink/68 sm:h-[48px] sm:grid-cols-[1fr_auto] sm:items-center sm:gap-6 sm:pb-0 sm:text-[12px]">
               <div className="inline-flex flex-wrap items-center gap-2.5 justify-self-start">
-                {/* Bauhaus square marker — Kandinsky red */}
+                {/* square marker*/}
                 <span
                   aria-hidden="true"
-                  className="size-[7px] shrink-0 bg-[#dd2f20]"
+                  className="size-[7px] shrink-0 bg-signal"
                 />
                 <span className="inline-flex flex-wrap items-center gap-x-2 gap-y-1">
                   {CONTACT_LINKS.map((link, index) => {
@@ -139,14 +136,14 @@ export function ContactFooterSection() {
                           href={link.href}
                           target={isExternal ? "_blank" : undefined}
                           rel={isExternal ? "noopener noreferrer" : undefined}
-                          className="transition-colors duration-200 hover:text-black"
+                          className="transition-colors duration-200 hover:text-ink"
                         >
                           {link.label}
                         </a>
                         {index < CONTACT_LINKS.length - 1 ? (
                           <span
                             aria-hidden="true"
-                            className="ml-2 text-[#09090a]/25"
+                            className="ml-2 text-ink/25"
                           >
                             /
                           </span>
@@ -161,7 +158,7 @@ export function ContactFooterSection() {
                 <p className="text-left sm:text-right">
                   Aarhus, DK <span aria-hidden="true">{"\u2014"}</span> 2026
                 </p>
-                {/* Bauhaus circle marker — Kandinsky blue */}
+                {/* circle marker*/}
                 <svg
                   aria-hidden="true"
                   width="8"
@@ -169,7 +166,7 @@ export function ContactFooterSection() {
                   viewBox="0 0 8 8"
                   className="shrink-0"
                 >
-                  <circle cx="4" cy="4" r="4" fill="#264491" opacity="0.68" />
+                  <rect width="7" height="7" fill="#1b1813" opacity="0.68" />
                 </svg>
               </div>
             </div>

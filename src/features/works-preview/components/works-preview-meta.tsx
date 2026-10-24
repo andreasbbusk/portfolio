@@ -12,17 +12,17 @@ export function WorksPreviewMeta({
 }: ProjectMetaProps) {
   return (
     <div className={cn("grid content-start gap-0")}>
-      <h3 className="mb-6 text-4xl leading-[0.95] tracking-[-0.035em] font-normal text-neutral-950 sm:text-5xl">
+      <h3 className="mb-6 text-4xl leading-[0.95] tracking-[-0.035em] font-normal text-ink sm:text-5xl">
         {title}
       </h3>
 
-      <div className="mb-8 max-w-[44ch] text-[15px] leading-relaxed text-[#5f636a] sm:text-base [&>p+p]:mt-4">
+      <div className="mb-8 max-w-[44ch] text-[15px] leading-relaxed text-[#5a5448] sm:text-base [&>p+p]:mt-4">
         {description}
       </div>
 
       <p
         className={cn(
-          "[font-family:var(--font-dm-mono)] text-[12px] tracking-[0.14em] text-[#7e8087]",
+          "[font-family:var(--font-dm-mono)] text-[12px] tracking-[0.14em] text-[#7b7466]",
           secondaryLink ? "mb-6" : "mb-8",
         )}
       >

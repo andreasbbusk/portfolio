@@ -58,7 +58,7 @@ function emitMiniConfetti(origin: HTMLElement) {
   container.style.zIndex = "120";
   document.body.appendChild(container);
 
-  const colors = ["#111111", "#6b7280", "#a1a1aa", "#d4d4d8"];
+  const colors = ["#1b1813", "#6f685b", "#a59e90", "#d5cebf"];
   const particleCount = 12;
   let maxDuration = 0;
 
@@ -80,7 +80,7 @@ function emitMiniConfetti(origin: HTMLElement) {
     particle.style.width = `${3 + Math.random() * 3}px`;
     particle.style.height = `${2 + Math.random() * 2}px`;
     particle.style.borderRadius = "999px";
-    particle.style.background = colors[Math.floor(Math.random() * colors.length)] ?? "#111111";
+    particle.style.background = colors[Math.floor(Math.random() * colors.length)] ?? "#1b1813";
     particle.style.opacity = "0";
     particle.style.transform = "translate3d(0,0,0)";
     container.appendChild(particle);
@@ -181,7 +181,7 @@ function InlineCopyLink({
       <div
         data-slot="inline-copy-link"
         className={cn(
-          "group/inline-copy inline-flex max-w-full items-center text-black/72",
+          "group/inline-copy inline-flex max-w-full items-center text-ink/72",
           className,
         )}
         onMouseEnter={() => setInteractionActive(true)}
@@ -222,7 +222,7 @@ function InlineCopyLinkAnchor({
     <Comp
       data-slot="inline-copy-link-anchor"
       className={cn(
-        "group/inline-copy-anchor order-2 min-w-0 text-[14px] leading-relaxed transition-colors duration-320 ease-[cubic-bezier(0.2,0.9,0.28,1)] hover:text-black focus-visible:text-black focus-visible:outline-none motion-reduce:transition-none",
+        "group/inline-copy-anchor order-2 min-w-0 text-[14px] leading-relaxed transition-colors duration-320 ease-[cubic-bezier(0.2,0.9,0.28,1)] hover:text-ink focus-visible:text-ink focus-visible:outline-none motion-reduce:transition-none",
         className,
       )}
       href={href ?? (hrefPrefix ? `${hrefPrefix}${value}` : undefined)}
@@ -263,7 +263,7 @@ function InlineCopyLinkButton({
       aria-label={copyAriaLabel}
       aria-hidden={!interactionActive}
       className={cn(
-        "peer/inline-copy-button order-1 inline-flex h-5 max-w-0 shrink-0 items-center justify-start gap-0.5 overflow-hidden whitespace-nowrap text-[12px] leading-none font-medium text-black/55 opacity-0 pointer-events-none after:inline-block after:w-0 after:shrink-0 after:content-[''] transition-[max-width,opacity,color] duration-320 ease-[cubic-bezier(0.2,0.9,0.28,1)] after:transition-[width] after:duration-320 after:ease-[cubic-bezier(0.2,0.9,0.28,1)] hover:text-black focus-visible:max-w-[88px] focus-visible:opacity-100 focus-visible:pointer-events-auto focus-visible:text-black focus-visible:outline-none focus-visible:after:w-1 group-hover/inline-copy:max-w-[88px] group-hover/inline-copy:opacity-100 group-hover/inline-copy:pointer-events-auto group-hover/inline-copy:after:w-1 motion-reduce:transition-none motion-reduce:after:transition-none",
+        "peer/inline-copy-button order-1 inline-flex h-5 max-w-0 shrink-0 items-center justify-start gap-0.5 overflow-hidden whitespace-nowrap text-[12px] leading-none font-medium text-ink/55 opacity-0 pointer-events-none after:inline-block after:w-0 after:shrink-0 after:content-[''] transition-[max-width,opacity,color] duration-320 ease-[cubic-bezier(0.2,0.9,0.28,1)] after:transition-[width] after:duration-320 after:ease-[cubic-bezier(0.2,0.9,0.28,1)] hover:text-ink focus-visible:max-w-[88px] focus-visible:opacity-100 focus-visible:pointer-events-auto focus-visible:text-ink focus-visible:outline-none focus-visible:after:w-1 group-hover/inline-copy:max-w-[88px] group-hover/inline-copy:opacity-100 group-hover/inline-copy:pointer-events-auto group-hover/inline-copy:after:w-1 motion-reduce:transition-none motion-reduce:after:transition-none",
         className,
       )}
       onClick={(event: React.MouseEvent<HTMLButtonElement>) => {

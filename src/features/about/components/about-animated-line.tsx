@@ -97,7 +97,7 @@ export function AboutAnimatedLine({
   }, [index, onRenderedLineCountChange, reducedMotion, text]);
 
   if (reducedMotion) {
-    return <p className={cn(className, "text-[#09090a]")}>{text}</p>;
+    return <p className={cn(className, "text-ink")}>{text}</p>;
   }
 
   const splitLines =
@@ -143,10 +143,10 @@ export function AboutAnimatedLine({
           className="pointer-events-none absolute inset-0 block"
         >
           <span className={cn(className, "relative block")}>
-            <span className="block text-[#bcc0c6]">{text}</span>
+            <span className="block text-[#b8b1a2]">{text}</span>
             <motion.span
               style={{ clipPath: singleClipPath }}
-              className="absolute inset-0 block text-[#09090a]"
+              className="absolute inset-0 block text-ink"
             >
               {text}
             </motion.span>

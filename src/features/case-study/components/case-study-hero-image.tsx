@@ -37,7 +37,7 @@ export function CaseStudyHeroImage({
       className="relative px-6 pb-[clamp(64px,8vw,128px)] md:px-12 lg:px-16"
     >
       <div className="mx-auto max-w-[1280px]">
-        <div className="relative aspect-16/10 w-full overflow-hidden rounded-sm bg-white">
+        <div className="relative aspect-16/10 w-full overflow-hidden rounded-sm bg-card">
           <motion.div
             className="absolute -top-5 right-0 -bottom-5 left-0"
             style={
@@ -57,7 +57,7 @@ export function CaseStudyHeroImage({
           </motion.div>
         </div>
         {image.caption && (
-          <p className="mt-4 font-mono text-[11px] uppercase tracking-[0.15em] text-[#7e8087]">
+          <p className="mt-4 font-mono text-[11px] uppercase tracking-[0.15em] text-[#7b7466]">
             {image.caption}
           </p>
         )}

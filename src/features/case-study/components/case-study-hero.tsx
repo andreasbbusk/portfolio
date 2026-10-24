@@ -36,7 +36,7 @@ export function CaseStudyHero({ title, subtitle, meta }: CaseStudyHeroProps) {
           href={meta.liveUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="underline underline-offset-4 decoration-[#09090a]/25 transition-colors duration-200 hover:decoration-[#09090a]"
+          className="underline underline-offset-4 decoration-ink/25 transition-colors duration-200 hover:decoration-ink"
         >
           {meta.liveLabel ?? meta.liveUrl}
         </a>
@@ -52,7 +52,7 @@ export function CaseStudyHero({ title, subtitle, meta }: CaseStudyHeroProps) {
           href={meta.sourceUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="underline underline-offset-4 decoration-[#09090a]/25 transition-colors duration-200 hover:decoration-[#09090a]"
+          className="underline underline-offset-4 decoration-ink/25 transition-colors duration-200 hover:decoration-ink"
         >
           {meta.sourceLabel ?? "Repository"}
         </a>
@@ -71,7 +71,7 @@ export function CaseStudyHero({ title, subtitle, meta }: CaseStudyHeroProps) {
             transition={{ duration: 0.7, ease: EASE, delay: 0 }}
             className={cn(
               "[font-family:var(--font-dm-sans)]",
-              "text-[clamp(3rem,8vw,8rem)] font-bold leading-[0.92] tracking-[-0.04em] text-[#09090a]",
+              "text-[clamp(3rem,8vw,8rem)] font-bold leading-[0.92] tracking-[-0.04em] text-ink",
             )}
           >
             {title}
@@ -81,28 +81,28 @@ export function CaseStudyHero({ title, subtitle, meta }: CaseStudyHeroProps) {
               initial={prefersReducedMotion ? false : { opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, ease: EASE, delay: 0.15 }}
-              className="mt-4 font-mono text-sm uppercase tracking-[0.15em] text-[#7e8087]"
+              className="mt-4 font-mono text-sm uppercase tracking-[0.15em] text-[#7b7466]"
             >
               {subtitle}
             </motion.p>
           )}
         </div>
 
-        {/* Metadata grid — Bauhaus specification table */}
+        {/* Metadata grid — specification table */}
         <motion.div
           initial={prefersReducedMotion ? false : { opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: EASE, delay: 0.3 }}
         >
-          {/* Bauhaus compound rule — primary color accents into architectural line */}
+          {/* Hairline rule — primary color accents into architectural line */}
           <div aria-hidden="true" className="flex h-[2px] overflow-hidden">
             {[
-              { color: "#dd2f20", delay: 0.45 },
-              { color: "#264491", delay: 0.5 },
-              { color: "#D4A72C", delay: 0.55 },
+              { color: "#b0600d", delay: 0.45 },
+              { color: "#1b1813", delay: 0.5 },
+              { color: "#b0600d", delay: 0.55 },
             ].map(({ color, delay }) => (
               <motion.div
-                key={color}
+                key={delay}
                 initial={prefersReducedMotion ? false : { scaleX: 0 }}
                 animate={{ scaleX: 1 }}
                 transition={{ duration: 0.5, ease: EASE, delay }}
@@ -110,14 +110,14 @@ export function CaseStudyHero({ title, subtitle, meta }: CaseStudyHeroProps) {
                 style={{ backgroundColor: color }}
               />
             ))}
-            <div className="flex-1 bg-[#09090a]" />
+            <div className="flex-1 bg-ink" />
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
             {metaEntries.map((entry, i) => (
               <div
                 key={entry.label}
                 className={cn(
-                  "border-b border-[#09090a]/15 py-5 pr-6",
+                  "border-b border-ink/15 py-5 pr-6",
                   /* Vertical dividers on larger screens */
                   i > 0 && "sm:border-l sm:pl-6",
                   /* On mobile, no left border on first of each row */
@@ -127,10 +127,10 @@ export function CaseStudyHero({ title, subtitle, meta }: CaseStudyHeroProps) {
                   i === 0 && "lg:border-l-0",
                 )}
               >
-                <p className="mb-2 font-mono text-[11px] uppercase tracking-[0.18em] text-[#7e8087]">
+                <p className="mb-2 font-mono text-[11px] uppercase tracking-[0.18em] text-[#7b7466]">
                   {entry.label}
                 </p>
-                <p className="text-[15px] font-medium leading-snug tracking-[-0.01em] text-[#09090a] [font-family:var(--font-dm-sans)]">
+                <p className="text-[15px] font-medium leading-snug tracking-[-0.01em] text-ink [font-family:var(--font-dm-sans)]">
                   {entry.value}
                 </p>
               </div>

@@ -32,6 +32,10 @@
   --color-primary-foreground: var(--primary-foreground);
   --color-primary: var(--primary);
   --color-orange: var(--orange);
+  --color-ink: var(--ink);
+  --color-paper: var(--paper);
+  --color-paper-deep: var(--paper-deep);
+  --color-signal: var(--signal);
   --color-popover-foreground: var(--popover-foreground);
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
@@ -45,25 +49,29 @@
 :root {
   --radius: 0.625rem;
   --dialog-backdrop: rgb(0 0 0 / 45%);
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --orange: oklch(0.6792 0.2128 36.53);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
+  --ink: #1b1813;
+  --paper: #f3efe6;
+  --paper-deep: #ebe6d9;
+  --signal: #b0600d;
+  --background: var(--paper);
+  --foreground: var(--ink);
+  --orange: var(--signal);
+  --card: #f8f5ee;
+  --card-foreground: var(--ink);
+  --popover: #f8f5ee;
+  --popover-foreground: var(--ink);
+  --primary: var(--ink);
+  --primary-foreground: var(--paper);
+  --secondary: var(--paper-deep);
+  --secondary-foreground: var(--ink);
+  --muted: var(--paper-deep);
+  --muted-foreground: #7b7466;
+  --accent: var(--paper-deep);
+  --accent-foreground: var(--ink);
   --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
+  --border: #ddd6c7;
+  --input: #ddd6c7;
+  --ring: var(--signal);
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
@@ -82,16 +90,6 @@
 @layer base {
   * {
     @apply border-border outline-ring/50 p-0 m-0 box-border;
-  }
-
-  body {
-    @apply bg-background text-foreground;
-  }
-}
-
-@layer base {
-  * {
-    @apply border-border outline-ring/50;
   }
 
   body {
@@ -132,10 +130,10 @@
     z-index: 200;
     transform: translateY(-220%);
     padding: 0.55rem 0.9rem;
-    border: 1px solid #09090a;
+    border: 1px solid #1b1813;
     border-radius: 0.4rem;
-    background: #ffffff;
-    color: #09090a;
+    background: #f8f5ee;
+    color: #1b1813;
     font-size: 0.85rem;
     line-height: 1;
     text-decoration: none;
@@ -168,7 +166,7 @@
    * Ensures all interactive elements have visible focus indicators
    */
   :focus-visible {
-    outline: 2px solid hsl(var(--ring));
+    outline: 2px solid var(--ring);
     outline-offset: 2px;
   }
 
@@ -236,32 +234,32 @@
 
   /* Menu overlay: blend scrollbar strip into menu background */
   html[data-menu-open].overflow-hidden {
-    background-color: #f5f5f3;
-    scrollbar-color: #f5f5f3 #f5f5f3;
+    background-color: #ebe6d9;
+    scrollbar-color: #ebe6d9 #ebe6d9;
   }
 
   html[data-menu-open].overflow-hidden::-webkit-scrollbar {
-    background: #f5f5f3;
+    background: #ebe6d9;
   }
 
   html[data-menu-open].overflow-hidden::-webkit-scrollbar-track {
-    background: #f5f5f3;
+    background: #ebe6d9;
   }
 
   html[data-menu-open].overflow-hidden::-webkit-scrollbar-track-piece {
-    background: #f5f5f3;
+    background: #ebe6d9;
   }
 
   html[data-menu-open].overflow-hidden::-webkit-scrollbar-thumb {
-    background-color: #f5f5f3;
-    border-color: #f5f5f3;
+    background-color: #ebe6d9;
+    border-color: #ebe6d9;
   }
 
   html[data-menu-open].overflow-hidden::-webkit-scrollbar-thumb:hover {
-    background-color: #f5f5f3;
+    background-color: #ebe6d9;
   }
 
   html[data-menu-open].overflow-hidden::-webkit-scrollbar-corner {
-    background: #f5f5f3;
+    background: #ebe6d9;
   }
 }

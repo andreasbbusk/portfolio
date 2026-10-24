@@ -54,7 +54,7 @@ function ContactCtaLink({
   return (
     <motion.a
       href={href}
-      className="group inline-flex items-center justify-between gap-5 rounded-xl border border-black/10 bg-white/60 px-5 py-4 text-[14px] transition-colors hover:border-black/18 hover:bg-white sm:px-6 sm:text-sm"
+      className="group inline-flex items-center justify-between gap-5 rounded-xl border border-ink/10 bg-card/60 px-5 py-4 text-[14px] transition-colors hover:border-ink/18 hover:bg-card sm:px-6 sm:text-sm"
       initial={reducedMotion ? false : { opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{
@@ -65,7 +65,7 @@ function ContactCtaLink({
       {...externalProps}
     >
       <span>{label}</span>
-      <span className="relative inline-flex size-4 shrink-0 overflow-hidden text-black/70">
+      <span className="relative inline-flex size-4 shrink-0 overflow-hidden text-ink/70">
         <ArrowRight
           className="absolute inset-0 size-4 translate-x-0 transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] motion-safe:group-hover:translate-x-[150%] motion-safe:group-focus-visible:translate-x-[150%] motion-reduce:transition-none"
           aria-hidden="true"
@@ -117,13 +117,13 @@ export function HeaderContact() {
           aria-controls="contact-dialog"
           aria-expanded={isOpen}
           aria-haspopup="dialog"
-          className="inline-flex items-center gap-2.5 text-black/68 justify-self-end"
+          className="inline-flex items-center gap-2.5 text-ink/68 justify-self-end"
         >
           <HeaderRoll
             text="Contact"
             className="font-mono text-[11px] leading-none font-medium tracking-[0.14em] uppercase sm:text-[12px]"
           />
-          {/* Bauhaus circle marker — Kandinsky blue */}
+          {/* circle marker*/}
           <svg
             aria-hidden="true"
             width="8"
@@ -131,7 +131,7 @@ export function HeaderContact() {
             viewBox="0 0 8 8"
             className="shrink-0"
           >
-            <circle cx="4" cy="4" r="4" fill="#264491" opacity="0.68" />
+            <rect width="7" height="7" fill="#1b1813" opacity="0.68" />
           </svg>
         </button>
       </DialogTrigger>
@@ -142,13 +142,13 @@ export function HeaderContact() {
           event.preventDefault();
           closeRef.current?.focus();
         }}
-        className="w-[min(92vw,720px)] max-w-[min(92vw,720px)] overflow-hidden rounded-[26px] border border-black/12 bg-[#f4f4f4]/95 p-0 shadow-[0_34px_70px_-26px_rgba(0,0,0,0.35)] sm:max-w-[min(92vw,720px)]"
+        className="w-[min(92vw,720px)] max-w-[min(92vw,720px)] overflow-hidden rounded-[26px] border border-ink/12 bg-[#ece7db]/95 p-0 shadow-[0_34px_70px_-26px_rgba(0,0,0,0.35)] sm:max-w-[min(92vw,720px)]"
       >
         {/* ──────────────────────────────────────────────── */}
-        {/*  Header bar — Bauhaus compound rule + close      */}
+        {/*  Header bar — Hairline rule + close      */}
         {/* ──────────────────────────────────────────────── */}
         <div className="relative px-6 pt-5 sm:px-10 sm:pt-8 lg:px-12 lg:pt-10">
-          {/* Bauhaus compound rule — tri-color segments into architectural line */}
+          {/* Hairline rule — tri-color segments into architectural line */}
           <AnimatePresence>
             {isOpen && (
               <motion.div
@@ -163,16 +163,13 @@ export function HeaderContact() {
                 }}
                 style={{ transformOrigin: "left" }}
               >
-                <div className="w-7 bg-[#dd2f20]" />
-                <div className="w-7 bg-[#264491]" />
-                <div className="w-7 bg-[#D4A72C]" />
-                <div className="flex-1 bg-[#09090a]" />
+                <div className="flex-1 bg-ink" />
               </motion.div>
             )}
           </AnimatePresence>
 
           <div className="flex items-center justify-between pt-4">
-            {/* Section label with Bauhaus square marker */}
+            {/* Section label with square marker */}
             <motion.span
               className="inline-flex items-center gap-2.5"
               initial={
@@ -185,12 +182,12 @@ export function HeaderContact() {
                 ease: EASE,
               }}
             >
-              {/* Bauhaus square marker — Kandinsky red */}
+              {/* square marker*/}
               <span
                 aria-hidden="true"
-                className="size-[7px] shrink-0 bg-[#dd2f20]"
+                className="size-[7px] shrink-0 bg-signal"
               />
-              <span className="font-mono text-[10px] leading-none font-medium tracking-[0.12em] text-black/45 uppercase sm:text-[11px]">
+              <span className="font-mono text-[10px] leading-none font-medium tracking-[0.12em] text-ink/45 uppercase sm:text-[11px]">
                 Contact
               </span>
             </motion.span>
@@ -200,7 +197,7 @@ export function HeaderContact() {
               <motion.button
                 ref={closeRef}
                 type="button"
-                className="inline-flex items-center gap-2.5 text-black/62 transition-colors duration-200 hover:text-black"
+                className="inline-flex items-center gap-2.5 text-ink/62 transition-colors duration-200 hover:text-ink"
                 initial={
                   prefersReducedMotion ? false : { opacity: 0, x: 8 }
                 }
@@ -222,7 +219,7 @@ export function HeaderContact() {
                   viewBox="0 0 8 8"
                   className="shrink-0"
                 >
-                  <circle cx="4" cy="4" r="4" fill="#264491" opacity="0.68" />
+                  <rect width="7" height="7" fill="#1b1813" opacity="0.68" />
                 </svg>
               </motion.button>
             </DialogClose>
@@ -243,7 +240,7 @@ export function HeaderContact() {
                 ease: EASE,
               }}
             >
-              <DialogTitle className="text-[clamp(24px,5vw,44px)] leading-[0.95] tracking-[-0.03em] text-black/85">
+              <DialogTitle className="text-[clamp(24px,5vw,44px)] leading-[0.95] tracking-[-0.03em] text-ink/85">
                 Let&apos;s work together.
               </DialogTitle>
             </motion.div>
@@ -256,7 +253,7 @@ export function HeaderContact() {
                 ease: EASE,
               }}
             >
-              <DialogDescription className="mt-5 text-[14px] leading-relaxed text-black/62 sm:text-[15px]">
+              <DialogDescription className="mt-5 text-[14px] leading-relaxed text-ink/62 sm:text-[15px]">
                 {CONTACT_MESSAGE}
               </DialogDescription>
             </motion.div>
@@ -284,7 +281,7 @@ export function HeaderContact() {
         {/* ──────────────────────────────────────────────── */}
         {/*  CTA links grid                                  */}
         {/* ──────────────────────────────────────────────── */}
-        <div className="mt-10 grid gap-4 px-6 text-sm text-black/72 sm:mt-14 sm:grid-cols-2 sm:px-10 lg:px-12">
+        <div className="mt-10 grid gap-4 px-6 text-sm text-ink/72 sm:mt-14 sm:grid-cols-2 sm:px-10 lg:px-12">
           {CONTACT_LINKS.map((link, index) => (
             <ContactCtaLink
               key={link.label}
@@ -298,7 +295,7 @@ export function HeaderContact() {
         </div>
 
         {/* ──────────────────────────────────────────────── */}
-        {/*  Footer — Kandinsky end marks + compound rule    */}
+        {/*  Footer*/}
         {/* ──────────────────────────────────────────────── */}
         <motion.div
           className="relative mt-10 sm:mt-14"
@@ -310,32 +307,29 @@ export function HeaderContact() {
             ease: EASE,
           }}
         >
-          {/* Kandinsky end marks */}
+          {/* end mark */}
           <div
             aria-hidden="true"
             className="flex items-center justify-center gap-4 pb-4"
           >
             <svg width="8" height="7" viewBox="0 0 8 7">
-              <polygon points="4,0 8,7 0,7" fill="#D4A72C" opacity="0.3" />
+              <rect width="7" height="7" fill="#b0600d" opacity="0.3" />
             </svg>
             <svg width="7" height="7" viewBox="0 0 7 7">
-              <rect width="7" height="7" fill="#dd2f20" opacity="0.3" />
+              <rect width="7" height="7" fill="#b0600d" opacity="0.3" />
             </svg>
             <svg width="8" height="8" viewBox="0 0 8 8">
-              <circle cx="4" cy="4" r="4" fill="#264491" opacity="0.3" />
+              <rect width="7" height="7" fill="#1b1813" opacity="0.3" />
             </svg>
           </div>
 
-          {/* Bauhaus compound rule — bottom */}
+          {/* Hairline rule — bottom */}
           <div className="relative px-6 pb-5 sm:px-10 sm:pb-8 lg:px-12 lg:pb-10">
             <div
               aria-hidden="true"
               className="pointer-events-none flex h-[2px] overflow-hidden"
             >
-              <div className="w-7 bg-[#dd2f20]" />
-              <div className="w-7 bg-[#264491]" />
-              <div className="w-7 bg-[#D4A72C]" />
-              <div className="flex-1 bg-[#09090a]" />
+              <div className="flex-1 bg-ink" />
             </div>
           </div>
         </motion.div>

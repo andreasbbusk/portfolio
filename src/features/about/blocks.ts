@@ -76,7 +76,7 @@ export const ABOUT_BLOCKS: AboutBlock[] = [
     lines: [
       "I'd rather understand a problem well than move fast and fix it later. That usually means asking more questions upfront, and iterating until both the data and the interface feel clear.",
       "I find it easier to start from what a product needs to do for the person using it, and work backwards to how it should be built.",
-      "I'm looking for a frontend internship where that approach matters — somewhere close to the product, where the focus is on how well something is built, not just that it's done.",
+      "I'm drawn to teams where that approach matters — close to the product, where the focus is on how well something is built, not just that it's done.",
     ],
   },
 ];

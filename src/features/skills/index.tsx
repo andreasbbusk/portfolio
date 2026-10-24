@@ -18,7 +18,7 @@ function punctuationAfter(index: number, total: number) {
 function SkillTerm({ skill }: { skill: SkillEntry }) {
   return (
     <Tooltip content={skill.tooltip} containerClassName="align-baseline">
-      <span className="relative inline cursor-pointer text-inherit [text-decoration:none] after:pointer-events-none after:absolute after:right-[0.06em] after:bottom-[-0.3em] after:left-[0.06em] after:content-[''] after:border-dotted after:border-b-[3px] after:border-neutral-300 after:transition-colors after:duration-100 hover:after:border-neutral-900">
+      <span className="relative inline cursor-pointer text-inherit [text-decoration:none] after:pointer-events-none after:absolute after:right-[0.06em] after:bottom-[-0.3em] after:left-[0.06em] after:content-[''] after:border-dotted after:border-b-[3px] after:border-ink/20 after:transition-colors after:duration-100 hover:after:border-ink">
         {skill.name}
       </span>
     </Tooltip>
@@ -44,7 +44,7 @@ export function SkillsSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-15%" }}
             transition={{ duration: 0.7, ease: EASE }}
-            className="mb-10 text-6xl tracking-tight font-semibold text-neutral-950 md:mb-12 md:text-8xl"
+            className="mb-10 text-6xl tracking-tight font-semibold text-ink md:mb-12 md:text-8xl"
           >
             Skills & Technologies
           </motion.h2>
@@ -66,20 +66,20 @@ export function SkillsSection() {
                   delay: rowIndex * 0.08,
                 }}
                 className={cn(
-                  "grid gap-6 border-b border-neutral-200 pb-12 md:grid-cols-[minmax(160px,28%)_minmax(0,1fr)] md:gap-10 md:pb-16",
+                  "grid gap-6 border-b border-ink/12 pb-12 md:grid-cols-[minmax(160px,28%)_minmax(0,1fr)] md:gap-10 md:pb-16",
                   rowIndex === 0 ? "pt-0" : "pt-8 md:pt-10",
                 )}
               >
-                <p className="[font-family:var(--font-dm-mono)] text-[13px] tracking-[0.14em] text-[#7e8087]">
+                <p className="[font-family:var(--font-dm-mono)] text-[13px] tracking-[0.14em] text-[#7b7466]">
                   <span className="inline-flex items-center gap-3">
                     <span
                       aria-hidden="true"
-                      className="size-3 shrink-0 bg-[#dd2f20]"
+                      className="size-3 shrink-0 bg-signal"
                     />
                     <span>{row.label}</span>
                   </span>
                 </p>
-                <div className="max-w-[44ch] text-xl leading-[1.3] tracking-[-0.01em] text-[#09090a] md:text-2xl">
+                <div className="max-w-[44ch] text-xl leading-[1.3] tracking-[-0.01em] text-ink md:text-2xl">
                   {row.skills.map((skill, skillIndex) => (
                     <span key={`${row.label}-${skill.name}`}>
                       <SkillTerm skill={skill} />

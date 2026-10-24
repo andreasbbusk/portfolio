@@ -229,7 +229,7 @@ export function HeaderMenu() {
         aria-controls="site-navigation-dialog"
         aria-expanded={isOpen}
         aria-haspopup="dialog"
-        className="inline-flex items-center justify-center text-black/68 justify-self-center"
+        className="inline-flex items-center justify-center text-ink/68 justify-self-center"
       >
         <HeaderRoll
           text="Menu"
@@ -249,7 +249,7 @@ export function HeaderMenu() {
                 role="dialog"
                 aria-modal="true"
                 aria-label="Site navigation"
-                className="fixed inset-0 z-50 flex flex-col bg-[#F5F5F3] font-sans outline-none"
+                className="fixed inset-0 z-50 flex flex-col bg-paper-deep font-sans outline-none"
                 variants={
                   prefersReducedMotion
                     ? curtainVariantsReduced
@@ -263,7 +263,7 @@ export function HeaderMenu() {
                 {/*  Header bar — mirrors site header layout        */}
                 {/* ──────────────────────────────────────────────── */}
                 <div className="relative h-[48px] w-full shrink-0 px-3 pt-2 sm:px-5 sm:pt-3">
-                  {/* Bauhaus compound rule — draws in from left */}
+                  {/* Hairline rule — draws in from left */}
                   <motion.div
                     aria-hidden="true"
                     className="pointer-events-none absolute left-3 right-3 top-[8px] flex h-[2px] overflow-hidden sm:left-5 sm:right-5 sm:top-[10px]"
@@ -276,16 +276,13 @@ export function HeaderMenu() {
                     }}
                     style={{ transformOrigin: "left" }}
                   >
-                    <div className="w-7 bg-[#dd2f20]" />
-                    <div className="w-7 bg-[#264491]" />
-                    <div className="w-7 bg-[#D4A72C]" />
-                    <div className="flex-1 bg-[#09090a]" />
+                    <div className="flex-1 bg-ink" />
                   </motion.div>
 
                   <div className="grid h-full grid-cols-[1fr_auto_1fr] items-center">
-                    {/* Left — label with Bauhaus square marker */}
+                    {/* Left — label with square marker */}
                     <motion.span
-                      className="inline-flex items-center gap-2.5 text-black/68 justify-self-start"
+                      className="inline-flex items-center gap-2.5 text-ink/68 justify-self-start"
                       initial={
                         prefersReducedMotion ? false : { opacity: 0, x: -8 }
                       }
@@ -298,7 +295,7 @@ export function HeaderMenu() {
                     >
                       <span
                         aria-hidden="true"
-                        className="size-[7px] shrink-0 bg-[#dd2f20]"
+                        className="size-[7px] shrink-0 bg-signal"
                       />
                       <span className="font-mono text-[11px] leading-none font-medium tracking-[0.14em] uppercase sm:text-[12px]">
                         Navigation
@@ -307,7 +304,7 @@ export function HeaderMenu() {
 
                     {/* Center — page count */}
                     <motion.span
-                      className="font-mono text-[11px] leading-none font-medium tracking-[0.14em] uppercase text-black/30 justify-self-center sm:text-[12px]"
+                      className="font-mono text-[11px] leading-none font-medium tracking-[0.14em] uppercase text-ink/30 justify-self-center sm:text-[12px]"
                       initial={prefersReducedMotion ? false : { opacity: 0 }}
                       animate={{ opacity: 1 }}
                       transition={{
@@ -322,7 +319,7 @@ export function HeaderMenu() {
                       Pages
                     </motion.span>
 
-                    {/* Right — close button with Bauhaus circle marker */}
+                    {/* Right — close button with circle marker */}
                     <motion.div
                       className="justify-self-end"
                       initial={
@@ -340,7 +337,7 @@ export function HeaderMenu() {
                         type="button"
                         onClick={handleClose}
                         aria-label="Close site navigation"
-                        className="inline-flex items-center gap-2.5 text-black/68 transition-colors duration-200 hover:text-black"
+                        className="inline-flex items-center gap-2.5 text-ink/68 transition-colors duration-200 hover:text-ink"
                       >
                         <HeaderRoll
                           text="Close"
@@ -353,7 +350,7 @@ export function HeaderMenu() {
                           viewBox="0 0 8 8"
                           className="shrink-0"
                         >
-                          <circle cx="4" cy="4" r="4" fill="#264491" opacity="0.68" />
+                          <rect width="7" height="7" fill="#1b1813" opacity="0.68" />
                         </svg>
                       </button>
                     </motion.div>
@@ -391,8 +388,8 @@ export function HeaderMenu() {
                               className={cn(
                                 "group relative flex items-center gap-3 py-[clamp(6px,1.1vh,14px)] transition-colors duration-300 sm:gap-4 md:gap-5",
                                 isActive(item.href)
-                                  ? "text-[#dd2f20]"
-                                  : "text-[#09090a] hover:text-[#dd2f20]",
+                                  ? "text-signal"
+                                  : "text-ink hover:text-signal",
                               )}
                             >
                               {/* Number */}
@@ -400,8 +397,8 @@ export function HeaderMenu() {
                                 className={cn(
                                   "w-[2.2em] shrink-0 text-right font-mono text-[clamp(10px,0.85vw,13px)] leading-none tracking-[0.06em] transition-colors duration-300",
                                   isActive(item.href)
-                                    ? "text-[#dd2f20]/50"
-                                    : "text-black/25 group-hover:text-[#dd2f20]/50",
+                                    ? "text-signal/50"
+                                    : "text-ink/25 group-hover:text-signal/50",
                                 )}
                               >
                                 {item.number}
@@ -416,8 +413,8 @@ export function HeaderMenu() {
                                   className={cn(
                                     "absolute inset-0 origin-left transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]",
                                     isActive(item.href)
-                                      ? "scale-x-100 bg-[#dd2f20]/30"
-                                      : "scale-x-0 bg-black/20 group-hover:scale-x-100 group-hover:bg-[#dd2f20]/30",
+                                      ? "scale-x-100 bg-signal/30"
+                                      : "scale-x-0 bg-ink/20 group-hover:scale-x-100 group-hover:bg-signal/30",
                                   )}
                                 />
                               </span>
@@ -440,8 +437,8 @@ export function HeaderMenu() {
                                     "ml-1 hidden self-end pb-[0.3em] text-[clamp(11px,1vw,15px)] tracking-[-0.005em] lg:inline",
                                     "transition-opacity duration-300",
                                     isActive(item.href)
-                                      ? "text-[#dd2f20]/35"
-                                      : "text-[#7e8087] opacity-0 group-hover:opacity-100",
+                                      ? "text-signal/35"
+                                      : "text-[#7b7466] opacity-0 group-hover:opacity-100",
                                   )}
                                 >
                                   {item.subtitle}
@@ -468,24 +465,21 @@ export function HeaderMenu() {
                   }}
                   className="relative shrink-0 px-3 pb-3 pt-4 sm:h-[48px] sm:px-5 sm:pb-4 sm:pt-0"
                 >
-                  {/* Bauhaus compound rule — tri-color segments into architectural line */}
+                  {/* Hairline rule — tri-color segments into architectural line */}
                   <div
                     aria-hidden="true"
                     className="pointer-events-none absolute bottom-[8px] left-3 right-3 flex h-[2px] overflow-hidden sm:bottom-[10px] sm:left-5 sm:right-5"
                   >
-                    <div className="w-7 bg-[#dd2f20]" />
-                    <div className="w-7 bg-[#264491]" />
-                    <div className="w-7 bg-[#D4A72C]" />
-                    <div className="flex-1 bg-[#09090a]" />
+                    <div className="flex-1 bg-ink" />
                   </div>
 
-                  <div className="relative grid gap-3 pb-4 font-mono text-[11px] leading-none font-medium uppercase tracking-[0.14em] text-black/68 sm:h-full sm:grid-cols-[1fr_auto] sm:items-center sm:gap-6 sm:pb-0 sm:text-[12px]">
+                  <div className="relative grid gap-3 pb-4 font-mono text-[11px] leading-none font-medium uppercase tracking-[0.14em] text-ink/68 sm:h-full sm:grid-cols-[1fr_auto] sm:items-center sm:gap-6 sm:pb-0 sm:text-[12px]">
                     {/* External links */}
                     <div className="inline-flex flex-wrap items-center gap-2.5 justify-self-start">
-                      {/* Bauhaus square marker — Kandinsky red */}
+                      {/* square marker*/}
                       <span
                         aria-hidden="true"
-                        className="size-[7px] shrink-0 bg-[#dd2f20]"
+                        className="size-[7px] shrink-0 bg-signal"
                       />
                       <span className="inline-flex flex-wrap items-center gap-x-2 gap-y-1">
                         {CONTACT_LINKS.map((link, index) => {
@@ -502,14 +496,14 @@ export function HeaderMenu() {
                                 rel={
                                   isExternal ? "noopener noreferrer" : undefined
                                 }
-                                className="transition-colors duration-200 hover:text-black"
+                                className="transition-colors duration-200 hover:text-ink"
                               >
                                 {link.label}
                               </a>
                               {index < CONTACT_LINKS.length - 1 && (
                                 <span
                                   aria-hidden="true"
-                                  className="ml-2 text-[#09090a]/25"
+                                  className="ml-2 text-ink/25"
                                 >
                                   /
                                 </span>
@@ -525,7 +519,7 @@ export function HeaderMenu() {
                       <p className="text-left sm:text-right">
                         Aarhus, DK {"\u2014"} 2026
                       </p>
-                      {/* Bauhaus circle marker — Kandinsky blue */}
+                      {/* circle marker*/}
                       <svg
                         aria-hidden="true"
                         width="8"
@@ -533,7 +527,7 @@ export function HeaderMenu() {
                         viewBox="0 0 8 8"
                         className="shrink-0"
                       >
-                        <circle cx="4" cy="4" r="4" fill="#264491" opacity="0.68" />
+                        <rect width="7" height="7" fill="#1b1813" opacity="0.68" />
                       </svg>
                     </div>
                   </div>

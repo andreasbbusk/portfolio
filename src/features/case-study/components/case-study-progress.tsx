@@ -3,11 +3,10 @@
 import { motion, useScroll, useSpring, useReducedMotion } from "motion/react";
 
 /**
- * Bauhaus Tri-Color Reading Progress Bar
+ * Reading progress bar
  *
  * Fixed to the top of the viewport, shows reading progress through
- * the article. Uses a gradient of the three Bauhaus primary colors
- * (red → blue → yellow). Hidden for reduced-motion users.
+ * the article. Drawn in the signal colour. Hidden for reduced-motion users.
  */
 export function CaseStudyProgress() {
   const prefersReducedMotion = useReducedMotion();
@@ -27,7 +26,7 @@ export function CaseStudyProgress() {
       style={{
         scaleX,
         background:
-          "linear-gradient(to right, #dd2f20, #264491 50%, #D4A72C)",
+          "#b0600d",
       }}
     />
   );

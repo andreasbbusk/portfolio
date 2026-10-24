@@ -18,7 +18,7 @@ export default function HomePage() {
   return (
     <div
       id="top"
-      className="pt-[84px] text-[#09090a] [font-family:var(--font-dm-sans)]"
+      className="pt-[84px] text-ink [font-family:var(--font-dm-sans)]"
     >
       <HeroSection />
       <SelectedWorksSection />

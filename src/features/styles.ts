@@ -9,11 +9,11 @@ export const homepageButtonBaseClass =
 export const homepagePrimaryButtonClass = cn(
   homepageButtonBaseClass,
   homepageSansFontClass,
-  "bg-[#dd2f20] text-[#09090a]",
+  "bg-signal text-ink",
 );
 
 export const homepageSecondaryButtonClass = cn(
   homepageButtonBaseClass,
   homepageSansFontClass,
-  "border-[#202126] bg-[#16161a]/95 text-white",
+  "border-[#26221b] bg-ink/95 text-paper",
 );

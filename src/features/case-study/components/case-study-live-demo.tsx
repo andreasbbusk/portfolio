@@ -40,7 +40,7 @@ export function CaseStudyLiveDemo({ demo }: CaseStudyLiveDemoProps) {
     <section className="relative px-6 pb-[clamp(64px,8vw,128px)] md:px-12 lg:px-16">
       <div className="mx-auto max-w-[1400px]">
         <div
-          className="relative w-full overflow-hidden rounded-sm border border-[#09090a]/10 bg-[#09090a]"
+          className="relative w-full overflow-hidden rounded-sm border border-ink/10 bg-ink"
           style={{ aspectRatio: demo.aspectRatio }}
         >
           {(state === "loading" || state === "ready") && (
@@ -53,7 +53,7 @@ export function CaseStudyLiveDemo({ demo }: CaseStudyLiveDemoProps) {
               allow="clipboard-read; clipboard-write; fullscreen"
               sandbox="allow-scripts allow-same-origin allow-forms allow-modals allow-popups allow-downloads"
               referrerPolicy="strict-origin-when-cross-origin"
-              className="absolute inset-0 h-full w-full bg-white"
+              className="absolute inset-0 h-full w-full bg-card"
               onLoad={() =>
                 setState((current) => (current === "loading" ? "ready" : current))
               }
@@ -77,12 +77,12 @@ export function CaseStudyLiveDemo({ demo }: CaseStudyLiveDemoProps) {
           )}
 
           {state === "idle" && (
-            <div className="absolute inset-0 flex items-end justify-center bg-gradient-to-t from-[#09090a]/85 via-[#09090a]/40 to-[#09090a]/35 p-6 md:p-8">
+            <div className="absolute inset-0 flex items-end justify-center bg-gradient-to-t from-ink/85 via-ink/40 to-ink/35 p-6 md:p-8">
               <div className="flex flex-col items-center gap-3 text-center">
                 <button
                   type="button"
                   onClick={startLoading}
-                  className="inline-flex items-center gap-2 border border-white/70 bg-white px-4 py-2 font-mono text-[11px] uppercase tracking-[0.16em] text-[#09090a] transition-colors hover:bg-[#f2f2f2]"
+                  className="inline-flex items-center gap-2 border border-paper/70 bg-card px-4 py-2 font-mono text-[11px] uppercase tracking-[0.16em] text-ink transition-colors hover:bg-[#ece7db]"
                 >
                   <Play aria-hidden="true" className="h-3.5 w-3.5" />
                   {ctaLabel}
@@ -91,7 +91,7 @@ export function CaseStudyLiveDemo({ demo }: CaseStudyLiveDemoProps) {
                   href={demo.launchUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 font-mono text-[11px] uppercase tracking-[0.14em] text-white/85 underline decoration-white/35 underline-offset-4 transition-colors hover:text-white hover:decoration-white/70"
+                  className="inline-flex items-center gap-1 font-mono text-[11px] uppercase tracking-[0.14em] text-paper/85 underline decoration-paper/35 underline-offset-4 transition-colors hover:text-paper hover:decoration-paper/70"
                 >
                   {fallbackLabel}
                   <ArrowUpRight aria-hidden="true" className="h-3.5 w-3.5" />
@@ -103,9 +103,9 @@ export function CaseStudyLiveDemo({ demo }: CaseStudyLiveDemoProps) {
           {state === "loading" && (
             <div
               aria-live="polite"
-              className="absolute inset-0 flex items-center justify-center bg-[#09090a]/30"
+              className="absolute inset-0 flex items-center justify-center bg-ink/30"
             >
-              <div className="inline-flex items-center gap-2 border border-white/30 bg-[#09090a]/70 px-3 py-2 font-mono text-[11px] uppercase tracking-[0.16em] text-white/90 backdrop-blur-sm">
+              <div className="inline-flex items-center gap-2 border border-paper/30 bg-ink/70 px-3 py-2 font-mono text-[11px] uppercase tracking-[0.16em] text-paper/90 backdrop-blur-sm">
                 <LoaderCircle aria-hidden="true" className="h-3.5 w-3.5 animate-spin" />
                 Loading live demo
               </div>
@@ -113,12 +113,12 @@ export function CaseStudyLiveDemo({ demo }: CaseStudyLiveDemoProps) {
           )}
 
           {state === "failed" && (
-            <div className="absolute inset-0 flex items-center justify-center bg-[#09090a]/60 p-6">
-              <div className="max-w-[460px] border border-white/30 bg-[#09090a]/85 p-6 text-white">
-                <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-white/75">
+            <div className="absolute inset-0 flex items-center justify-center bg-ink/60 p-6">
+              <div className="max-w-[460px] border border-paper/30 bg-ink/85 p-6 text-paper">
+                <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-paper/75">
                   Live Demo Unavailable
                 </p>
-                <p className="mt-3 text-sm leading-relaxed text-white/90">
+                <p className="mt-3 text-sm leading-relaxed text-paper/90">
                   The site blocked embedded rendering or took too long to load.
                   You can retry here or open the demo in a new tab.
                 </p>
@@ -126,7 +126,7 @@ export function CaseStudyLiveDemo({ demo }: CaseStudyLiveDemoProps) {
                   <button
                     type="button"
                     onClick={startLoading}
-                    className="inline-flex items-center gap-2 border border-white/70 bg-white px-4 py-2 font-mono text-[11px] uppercase tracking-[0.16em] text-[#09090a] transition-colors hover:bg-[#f2f2f2]"
+                    className="inline-flex items-center gap-2 border border-paper/70 bg-card px-4 py-2 font-mono text-[11px] uppercase tracking-[0.16em] text-ink transition-colors hover:bg-[#ece7db]"
                   >
                     <RotateCcw aria-hidden="true" className="h-3.5 w-3.5" />
                     Retry
@@ -135,7 +135,7 @@ export function CaseStudyLiveDemo({ demo }: CaseStudyLiveDemoProps) {
                     href={demo.launchUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 font-mono text-[11px] uppercase tracking-[0.14em] text-white/85 underline decoration-white/35 underline-offset-4 transition-colors hover:text-white hover:decoration-white/70"
+                    className="inline-flex items-center gap-1 font-mono text-[11px] uppercase tracking-[0.14em] text-paper/85 underline decoration-paper/35 underline-offset-4 transition-colors hover:text-paper hover:decoration-paper/70"
                   >
                     {fallbackLabel}
                     <ArrowUpRight aria-hidden="true" className="h-3.5 w-3.5" />
@@ -146,15 +146,15 @@ export function CaseStudyLiveDemo({ demo }: CaseStudyLiveDemoProps) {
           )}
         </div>
 
-        <div className="mt-4 flex flex-wrap items-center justify-between gap-3 border-t border-[#09090a]/10 pt-4">
-          <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-[#7e8087]">
+        <div className="mt-4 flex flex-wrap items-center justify-between gap-3 border-t border-ink/10 pt-4">
+          <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-[#7b7466]">
             Live Demo · Click to load
           </p>
           <a
             href={demo.launchUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1 font-mono text-[11px] uppercase tracking-[0.14em] text-[#09090a] underline decoration-[#09090a]/30 underline-offset-4 transition-colors hover:decoration-[#09090a]"
+            className="inline-flex items-center gap-1 font-mono text-[11px] uppercase tracking-[0.14em] text-ink underline decoration-ink/30 underline-offset-4 transition-colors hover:decoration-ink"
           >
             {fallbackLabel}
             <ArrowUpRight aria-hidden="true" className="h-3.5 w-3.5" />

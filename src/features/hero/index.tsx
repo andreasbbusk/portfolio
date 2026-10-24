@@ -30,9 +30,9 @@ export function HeroSection() {
             initial={prefersReducedMotion ? false : { opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: EASE, delay: 0 }}
-            className="inline-flex items-center gap-3 font-mono text-[13px] uppercase tracking-[0.14em] text-[#7e8087]"
+            className="inline-flex items-center gap-3 font-mono text-[13px] uppercase tracking-[0.14em] text-[#7b7466]"
           >
-            <span aria-hidden="true" className="size-[7px] shrink-0 bg-[#dd2f20]" />
+            <span aria-hidden="true" className="size-[7px] shrink-0 bg-signal" />
             Web Developer Portfolio
           </motion.p>
           <motion.h1
@@ -90,10 +90,7 @@ export function HeroSection() {
             ))}
           </div>
           <div className="flex min-w-0 flex-1 h-[2px] overflow-hidden" aria-hidden="true">
-            <div className="w-7 bg-[#dd2f20]" />
-            <div className="w-7 bg-[#264491]" />
-            <div className="w-7 bg-[#D4A72C]" />
-            <div className="flex-1 bg-[#09090a]" />
+            <div className="flex-1 bg-ink" />
           </div>
         </motion.div>
       </div>

@@ -20,14 +20,11 @@ const EASE = [0.22, 1, 0.36, 1] as const;
  * Per-block scroll reveal animation via whileInView.
  */
 
-/**
- * Kandinsky's form–color correspondence (Bauhaus, 1923):
- * Triangle → Yellow · Square → Red · Circle → Blue
- */
-const BAUHAUS_MARKERS = [
-  <svg key="triangle" aria-hidden="true" width="8" height="7" viewBox="0 0 8 7" className="shrink-0"><polygon points="4,0 8,7 0,7" fill="#D4A72C" /></svg>,
-  <svg key="square" aria-hidden="true" width="7" height="7" viewBox="0 0 7 7" className="shrink-0"><rect width="7" height="7" fill="#dd2f20" /></svg>,
-  <svg key="circle" aria-hidden="true" width="8" height="8" viewBox="0 0 8 8" className="shrink-0"><circle cx="4" cy="4" r="4" fill="#264491" /></svg>,
+/** Section markers: one quiet square per section, alternating signal and ink. */
+const SECTION_MARKERS = [
+  <svg key="a" aria-hidden="true" width="7" height="7" viewBox="0 0 7 7" className="shrink-0"><rect width="7" height="7" fill="#b0600d" /></svg>,
+  <svg key="b" aria-hidden="true" width="7" height="7" viewBox="0 0 7 7" className="shrink-0"><rect width="7" height="7" fill="#b0600d" /></svg>,
+  <svg key="c" aria-hidden="true" width="7" height="7" viewBox="0 0 7 7" className="shrink-0"><rect width="7" height="7" fill="#1b1813" /></svg>,
 ];
 
 export function CaseStudyNarrative({ blocks }: CaseStudyNarrativeProps) {
@@ -36,7 +33,7 @@ export function CaseStudyNarrative({ blocks }: CaseStudyNarrativeProps) {
   return (
     <section className="py-[clamp(64px,8vw,128px)]">
       <div className="mx-auto w-full max-w-[1680px] px-6 md:px-12">
-        <div className="border-t border-[#09090a]/15">
+        <div className="border-t border-ink/15">
           {blocks.map((block, i) => (
             <motion.div
               key={block.number}
@@ -52,21 +49,21 @@ export function CaseStudyNarrative({ blocks }: CaseStudyNarrativeProps) {
                 ease: EASE,
                 delay: i * 0.08,
               }}
-              className="grid grid-cols-1 gap-6 border-b border-[#09090a]/15 py-[clamp(32px,4vw,56px)] md:grid-cols-[minmax(200px,1fr)_3fr] md:gap-12 lg:grid-cols-[280px_1fr]"
+              className="grid grid-cols-1 gap-6 border-b border-ink/15 py-[clamp(32px,4vw,56px)] md:grid-cols-[minmax(200px,1fr)_3fr] md:gap-12 lg:grid-cols-[280px_1fr]"
             >
-              {/* Left column: numbered heading with Bauhaus geometric marker */}
+              {/* Left column: numbered heading with geometric marker */}
               <div className="flex items-start gap-3">
-                <span className="mt-[3px]">{BAUHAUS_MARKERS[i % 3]}</span>
-                <p className="font-mono text-[13px] font-medium uppercase tracking-[0.12em] text-[#7e8087]">
-                  <span className="text-[#09090a]">{block.number}</span>
-                  <span className="mx-2 text-[#09090a]/25">/</span>
+                <span className="mt-[3px]">{SECTION_MARKERS[i % 3]}</span>
+                <p className="font-mono text-[13px] font-medium uppercase tracking-[0.12em] text-[#7b7466]">
+                  <span className="text-ink">{block.number}</span>
+                  <span className="mx-2 text-ink/25">/</span>
                   {block.heading}
                 </p>
               </div>
 
               {/* Right column: body copy */}
               <div className="max-w-prose">
-                <p className="text-[17px] leading-[1.75] tracking-[-0.005em] text-[#09090a]/85 [font-family:var(--font-dm-sans)]">
+                <p className="text-[17px] leading-[1.75] tracking-[-0.005em] text-ink/85 [font-family:var(--font-dm-sans)]">
                   {block.body}
                 </p>
               </div>

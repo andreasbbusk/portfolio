@@ -7,7 +7,7 @@ export type ContactLink = {
 export const CONTACT_EMAIL = "contact@andreasbusk.dk";
 
 export const CONTACT_MESSAGE =
-  "If you're working on something interesting and think I'd be a good fit, I'd like to hear about it. I'm currently looking for a frontend internship.";
+  "If you're working on something interesting and think I'd be a good fit, I'd like to hear about it. I'm open to new frontend roles.";
 
 export const CONTACT_LINKS = [
   { label: "Download CV", href: "/cv.pdf" },

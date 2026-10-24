@@ -99,7 +99,7 @@ export const useStudyProgressStore = create<StudyProgressState>()(
     pullQuote:
       "A dense, operator-grade interface handling thousands of keywords — with every filter composable into a single pipeline.",
     meta: {
-      role: "Frontend Developer (Intern)",
+      role: "Frontend Developer",
       stack: "Next.js 15, TypeScript, MongoDB, Mongoose, TanStack Table, Zustand, Recharts, Tailwind CSS",
       year: "2024\u20132025",
       liveUrl: "https://rank-tracker-flax.vercel.app",
@@ -115,7 +115,7 @@ export const useStudyProgressStore = create<StudyProgressState>()(
       {
         number: "01",
         heading: "The Constraint",
-        body: "The first version was built during my internship at Conversio, laying the groundwork for the operator UI. After the internship I rebuilt the project as a standalone portfolio piece with its own data layer. The challenge: create a dense, operator-grade interface that handles thousands of keywords across multiple domains, with inline charts, composable filters, and a modular report builder — all backed by a multi-tenant sandbox so every visitor gets an isolated demo session with seeded data.",
+        body: "The first version was built at Conversio, laying the groundwork for the operator UI. Afterwards I rebuilt the project as a standalone portfolio piece with its own data layer. The challenge: create a dense, operator-grade interface that handles thousands of keywords across multiple domains, with inline charts, composable filters, and a modular report builder — all backed by a multi-tenant sandbox so every visitor gets an isolated demo session with seeded data.",
       },
       {
         number: "02",
@@ -214,55 +214,6 @@ if (t > 0.0) {
   surface = mix(surface, vec3(1.0), clouds * CLOUD_DENSITY);
   surface += specMask * phongSpecular(rd, normal, uSunDirection);
 }`,
-      },
-    ],
-    nextProject: {
-      slug: "vejle-mod-hudcancer",
-      title: "Vejle mod hudcancer",
-    },
-  },
-  {
-    slug: "vejle-mod-hudcancer",
-    title: "Vejle mod hudcancer",
-    subtitle: "Danish non-profit website",
-    pullQuote:
-      "100% of donations going directly to research — and a website their non-technical team could own.",
-    meta: {
-      role: "Frontend Developer",
-      stack: "Next.js 15, TypeScript, Sanity CMS, Tailwind CSS v4, Framer Motion, Radix UI",
-      year: "2025",
-    },
-    heroImage: {
-      src: "/images/works/vmh-1.webp",
-      alt: "Vejle mod hudcancer homepage with hero section and fundraising statistics",
-    },
-    narrative: [
-      {
-        number: "01",
-        heading: "The Constraint",
-        body: "Vejle mod hudcancer is a Danish non-profit that has raised over 3.4 million DKK for local skin cancer research since 2017, with 100% of donations going directly to research. The organization needed a website their non-technical team could update on their own — new research projects, photo galleries, event announcements — without any developer involvement. The site is entirely in Danish, and the design had to communicate trust for an organization whose collections are audited by Ernst & Young.",
-      },
-      {
-        number: "02",
-        heading: "The Architecture",
-        body: "Sanity CMS provides the content layer with GROQ queries driving all page data. Content types include research projects with funding goals and status tracking, gallery year pages with photographer-categorized image batches, and event pages. All pages are server components that fetch at build time, with tiered ISR revalidation — 60 seconds for the project landing page, 300 seconds for standard content, 600 seconds for navigation data. React cache() deduplicates requests within a single render pass. The header navigation fetches project and gallery previews from Sanity in parallel via Promise.all, rendering dynamic dropdown menus with Radix NavigationMenu.",
-      },
-      {
-        number: "03",
-        heading: "The Interface",
-        body: "The projects section features spring-animated fundraising counters and animated bar charts that build sequentially on scroll, showing money raised per year with 3D shadow effects. Individual project pages show a funding progress bar, status badges, and image galleries — all CMS-driven via generateStaticParams. The gallery pages support filtering by photographer and photobooth categories using Radix Tabs, with a full-screen lightbox and download capability. The responsive header transforms on scroll — adding a blur backdrop, rounded corners, and floating effect — and the mobile menu uses Framer Motion for staggered item reveals with body scroll lock. Adobe Typekit serves the brand fonts: Adelle (serif) for headlines and Adelle Sans for body text.",
-      },
-    ],
-    secondaryImages: [
-      {
-        src: "/images/works/vmh-2.webp",
-        alt: "Projects page with animated fundraising charts and progress tracking",
-        backing: "white",
-      },
-      {
-        src: "/images/works/vmh-3.webp",
-        alt: "Gallery page with category filters and lightbox image viewer",
-        backing: "gray",
       },
     ],
     nextProject: {

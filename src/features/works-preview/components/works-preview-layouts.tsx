@@ -82,15 +82,15 @@ export function WorksPreviewPortfolioCard({
         <SafariPlaceholderFrame url={feature.url} />
 
         <div className="mx-auto grid max-w-[56ch] justify-items-center gap-4 text-center">
-          <h3 className="text-3xl leading-[0.95] tracking-[-0.035em] font-normal text-neutral-950 sm:text-4xl">
+          <h3 className="text-3xl leading-[0.95] tracking-[-0.035em] font-normal text-ink sm:text-4xl">
             {feature.title}
           </h3>
 
-          <p className="text-[15px] leading-relaxed text-[#5f636a] sm:text-base">
+          <p className="text-[15px] leading-relaxed text-[#5a5448] sm:text-base">
             {feature.body}
           </p>
 
-          <p className="[font-family:var(--font-dm-mono)] text-[12px] tracking-[0.14em] text-[#7e8087]">
+          <p className="[font-family:var(--font-dm-mono)] text-[12px] tracking-[0.14em] text-[#7b7466]">
             {feature.stack}
           </p>
 

@@ -25,7 +25,7 @@ export default function GlobalError({ error, reset }: GlobalErrorPageProps) {
           <button
             type="button"
             onClick={() => reset()}
-            className="rounded-xl bg-orange px-5 py-2 text-sm font-medium text-black transition-opacity hover:opacity-90"
+            className="rounded-xl bg-orange px-5 py-2 text-sm font-medium text-ink transition-opacity hover:opacity-90"
           >
             Reload
           </button>

@@ -43,7 +43,7 @@ export const RANK_TRACKER_WORK: WorksPreviewFeature = {
     title: (
       <>
         <span className="block">Rank Tracker</span>
-        <span className="mt-2 block text-[0.54em] leading-[1.02] tracking-[-0.02em] text-[#5f636a]">
+        <span className="mt-2 block text-[0.54em] leading-[1.02] tracking-[-0.02em] text-[#5a5448]">
           (Conversio Hub)
         </span>
       </>
@@ -52,7 +52,7 @@ export const RANK_TRACKER_WORK: WorksPreviewFeature = {
       <>
         <p>
           The SEO operations tool inside Conversio Hub. I built the first
-          version during my internship at Conversio, laying the groundwork for
+          version at Conversio, laying the groundwork for
           the operator UI: dense tables, filtering, and in depth analysis.
         </p>
         <p>
@@ -84,30 +84,6 @@ export const GOLDILOX_WORK: WorksPreviewFeature = {
       "A single-page WebGL scrollytelling experience about planetary habitability. Ray-traced planets via custom GLSL shaders, scroll-driven chapters, no backend.",
     stack: "Astro · Three.js · GLSL · SCSS",
     primaryLink: { href: "/works/goldilox-paradox", label: "Read Case Study" },
-  },
-};
-
-export const VEJLE_WORK: WorksPreviewFeature = {
-  url: "",
-  previewImageSrc: "/images/works/vmh-1.webp",
-  previewImageAlt:
-    "Vejle mod hudcancer homepage preview with hero, statistics, and event section",
-  meta: {
-    title: (
-      <>
-        Vejle mod hudcancer{" "}
-        <span className="text-[0.5em] italic text-[#7e8087]">
-          (in progress)
-        </span>
-      </>
-    ),
-    description:
-      "Website for the Danish non-profit Vejle mod hudcancer with CMS-driven project and gallery content. Dynamic pages and a motion layer that stays readable.",
-    stack: "Next.js · Sanity · Tailwind · Framer Motion",
-    primaryLink: {
-      href: "/works/vejle-mod-hudcancer",
-      label: "Read Case Study",
-    },
   },
 };
 
